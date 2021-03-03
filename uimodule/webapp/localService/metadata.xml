@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSV_CTA_CORRIENTE_SRV" xml:lang="es" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="cta_saldo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fecha" Type="Edm.String" Nullable="false" sap:label="Fecha Contabilización" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FechaDesde" Type="Edm.String" Nullable="false" sap:label="Fecha de Contabilización Desde" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ampliada" Type="Edm.String" Nullable="false" sap:label="Fecha de Contabilización Hasta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FechaHasta" Type="Edm.String" Nullable="false" sap:label="Cuenta Corriente Ampliada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="KunnrName1" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ASaldoCc" Type="Edm.String" Nullable="false" sap:label="1.A Saldo Compensacion en Cuenta Corriente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BSaldoContab" Type="Edm.String" Nullable="false" sap:label="1.B Facturas/Liquidaciones/NC/ND Contabilizadas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CSaldoOtras" Type="Edm.String" Nullable="false" sap:label="1.C Otras Facturas/Liquidaciones (no toman linea de credito)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DSaldoOperac" Type="Edm.String" Nullable="false" sap:label="1.D Operaciones de Cereal Liquidadas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ESaldoDeposito" Type="Edm.String" Nullable="false" sap:label="1.E Depositos Acreditados" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FSaldoVencido" Type="Edm.String" Nullable="false" sap:label="1.F Vencido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SaldoCliente" Type="Edm.String" Nullable="false" sap:label="1. SALDO TOTAL CUENTACORRIENTE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Financiadas" Type="Edm.String" Nullable="false" sap:label="2. Facturas/Liquidaciones a Plazo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SaldoFinal" Type="Edm.String" Nullable="false" sap:label="3. SALDO FINAL (1+2)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OpePFijar" Type="Edm.String" Nullable="false" sap:label="5. Cereal Entregado pendiente de Fijar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OpePFactu" Type="Edm.String" Nullable="false" sap:label="5. Cereal Entregado pendiente de Facturar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Operaciones" Type="Edm.String" Nullable="false" sap:label="5. TOTAL OTRAS OPERACIONES" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GSaldoRd" Type="Edm.String" Nullable="false" sap:label="CPD Pendientes de acreditarse Galicia" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HCerVenc" Type="Edm.String" Nullable="false" sap:label="Vencido según fecha maxima de entrega" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ICerAVenc" Type="Edm.String" Nullable="false" sap:label="A vencer segun fecha maxima de entrega" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FinanOtras" Type="Edm.String" Nullable="false" sap:label="Financiadas Otras (no toman linea de credito)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalFinan" Type="Edm.String" Nullable="false" sap:label="Total operaciones financiadas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GSaldoRdRio" Type="Edm.String" Nullable="false" sap:label="CPD Pendientes de acreditarse Rio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OpePEntrega" Type="Edm.String" Nullable="false" sap:label="Pendiente de entrega" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FactVencidas" Type="Edm.String" Nullable="false" sap:label="Facturas Vencidas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FactAntVencidas" Type="Edm.String" Nullable="false" sap:label="Facturas Anticipada vencidas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FactAVencer" Type="Edm.String" Nullable="false" sap:label="Factuas a vencer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FactAntAVencer" Type="Edm.String" Nullable="false" sap:label="Facturas Anticipadas a vencer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pagos" Type="Edm.String" Nullable="false" sap:label="Pagos" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LineaAfectada" Type="Edm.String" Nullable="false" sap:label="Línea de Crédito Afectada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LineaAcordada" Type="Edm.String" Nullable="false" sap:label="Línea de Crédito Acordada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LineaDisponible" Type="Edm.String" Nullable="false" sap:label="Línea de Crédito Disponible" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalCupos" Type="Edm.String" Nullable="false" sap:label="Total Cupos Solicitados" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AVencer" Type="Edm.String" Nullable="false" sap:label="A vencer según fecha de negocio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vencidos" Type="Edm.String" Nullable="false" sap:label="Vencidos según fecha de negocio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalNegocio" Type="Edm.String" Nullable="false" sap:label="Total Negocios" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalSaldoFin" Type="Edm.String" Nullable="false" sap:label="SALDO FINAL CUENTA CORRIENTE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalSaldoCereal" Type="Edm.String" Nullable="false" sap:label="SALDO CEREAL ENTREGADO O LIQUIDADO PENDIENTE DE ENTREGA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalContratos" Type="Edm.String" Nullable="false" sap:label="CONTRATOS DE GRANO PENDIENTE DE ENTREGA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalCheques" Type="Edm.String" Nullable="false" sap:label="CHEQUES DE PAGOS DIFERIDOS PENDIENTE DE ACREDITARSE" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="det_negocio" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                    <PropertyRef Name="Bstdk"/>
+                    <PropertyRef Name="Arktx"/>
+                    <PropertyRef Name="Netpr"/>
+                    <PropertyRef Name="Werks"/>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Negocio" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Bstdk" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:label="Fecha de Negocio" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Arktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Producto" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Netpr" Type="Edm.String" Nullable="false" sap:label="Precio" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Centro" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="BstdkE" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:label="Fecha Pago" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Gueen" Type="Edm.DateTime" Nullable="false" Precision="7" sap:display-format="Date" sap:label="Vig. Neg." sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Zmeng" Type="Edm.String" Nullable="false" sap:label="Negociado" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="CupoSinFact" Type="Edm.String" Nullable="false" sap:label="Cupo s/fact" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Saldo" Type="Edm.String" Nullable="false" sap:label="Saldo s/fact" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Valor" Type="Edm.String" Nullable="false" sap:label="Valor USD + IVA" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Vencido" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Vencido" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Diasmora" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Dias de Mora" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Kkber" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="ACC" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Bsark" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Tipo Ct." sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="cta_det_sal" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechaMov" Type="Edm.DateTime" Precision="7" sap:label="Fecha Movimiento" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechaSaldo" Type="Edm.DateTime" Precision="7" sap:label="Fecha Saldo Cuenta Corriente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Tipo Doc." sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="BlartTxt" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Concepto" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Zuonr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Nro. Comprobante" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Budat" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Fecha Documento" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Zfbdt" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Vencimiento" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Dmbtr" Type="Edm.String" Nullable="false" sap:label="Importe $" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="SaldoAcumMl" Type="Edm.String" Nullable="false" sap:label="Saldo Acumulado $" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TipoCambio" Type="Edm.String" Nullable="false" sap:label="Tipo de Cambio" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Dmbe3" Type="Edm.String" Nullable="false" sap:label="Importe en USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="SaldoAcumMe" Type="Edm.String" Nullable="false" sap:label="Saldo Acumulado USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="det_cereal" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechaMov" Type="Edm.DateTime" Precision="7" sap:label="Fecha Movimiento" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechaSaldo" Type="Edm.DateTime" Precision="7" sap:label="Fecha Saldo Cuenta Corriente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Contrato" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Contrato" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="NroComprobante" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Nro Comprobante" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Fecha" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="DescEspecie" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Especie" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Corredor" Type="Edm.String" Nullable="false" MaxLength="35" sap:label="Corredor" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Desde" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Desde" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Hasta" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Hasta" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Modalidad" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Modalidad" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnPactadas" Type="Edm.String" Nullable="false" sap:label="Totales TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnEntregadas" Type="Edm.String" Nullable="false" sap:label="Entregadas TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnEntrLiquidadas" Type="Edm.String" Nullable="false" sap:label="Entr. Liq TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnEntrPendFijar" Type="Edm.String" Nullable="false" sap:label="Entr.Pend.Fijar TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnEntrPendLiqui" Type="Edm.String" Nullable="false" sap:label="Entr.Pend.Liq TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnLiqNoEntregadas" Type="Edm.String" Nullable="false" sap:label="Liq.no.Enr TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TnPteEnt" Type="Edm.String" Nullable="false" sap:label="Pend.Entr TN" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="UsdEntrPendFijar" Type="Edm.String" Nullable="false" sap:label="Entr.Pend.Fijar USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="UsdEntrPendLiqui" Type="Edm.String" Nullable="false" sap:label="Entr.Pend.Liq USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="UsdLiqNoEntregadas" Type="Edm.String" Nullable="false" sap:label="Liq.Pend.Entr USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="UsdPend" Type="Edm.String" Nullable="false" sap:label="Pend.Entrega USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="det_cheque" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                    <PropertyRef Name="Item"/>
+                    <PropertyRef Name="Gjahr"/>
+                    <PropertyRef Name="Belnr"/>
+                    <PropertyRef Name="Buzei"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechMov" Type="Edm.DateTime" Precision="7" sap:label="Fecha Movimiento" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="FechaSaldo" Type="Edm.DateTime" Precision="7" sap:label="Fecha Saldo Cuenta Corriente" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Item" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Tipo Doc." sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="BlartTxt" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Concepto" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Zuonr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Nro. Comprobante" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Bldat" Type="Edm.DateTime" Precision="7" sap:label="Fecha documento" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Zfbdt" Type="Edm.DateTime" Precision="7" sap:label="Vencimiento" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Dmbtr" Type="Edm.String" Nullable="false" sap:label="Importe $" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="SaldoAcumMl" Type="Edm.String" Nullable="false" sap:label="Saldo Acumulado $" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="TipoCambio" Type="Edm.String" Nullable="false" sap:label="Tipo de Cambio" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Dmbe3" Type="Edm.String" Nullable="false" sap:label="Importe en USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="SaldoAcumMe" Type="Edm.String" Nullable="false" sap:label="Saldo Acumulado USD" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Ejercicio" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Belnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Nº documento" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Buzei" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Posición" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <ComplexType Name="IKunnr">
+                <Property Name="Parameter" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Parámetro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sign" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Inclusive/Exclusive" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Option" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Oper.selec.OPTION" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Low" Type="Edm.String" Nullable="false" MaxLength="45" sap:label="Delimit." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="High" Type="Edm.String" Nullable="false" MaxLength="45" sap:label="Delimit." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <EntityContainer Name="ZSV_CTA_CORRIENTE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json">
+                <EntitySet Name="cta_saldoSet" EntityType="ZSV_CTA_CORRIENTE_SRV.cta_saldo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="det_negocioSet" EntityType="ZSV_CTA_CORRIENTE_SRV.det_negocio" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="cta_det_salSet" EntityType="ZSV_CTA_CORRIENTE_SRV.cta_det_sal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="det_cerealSet" EntityType="ZSV_CTA_CORRIENTE_SRV.det_cereal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="det_chequeSet" EntityType="ZSV_CTA_CORRIENTE_SRV.det_cheque" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://d02profer:8001/sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="http://d02profer:8001/sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

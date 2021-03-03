@@ -1,0 +1,2 @@
+destinations=[{"name":"DesarrolloCF","url":"http://DesarrolloCF.dest","proxyHost":"http://127.0.0.1","proxyPort":"8887"}]
+VCAP_SERVICES={}

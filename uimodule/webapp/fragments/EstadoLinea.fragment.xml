@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+  height="100%">
+	<Table id="idEstadoLineaTable" inset="false" width="50%">
+		<columns>
+			<Column
+        width="35em"
+				demandPopin="true">
+				<Text text="{i18n>descripcion}" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="{i18n>montos}" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{i18n>lineaCrAco}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/LineaAfectada}" class="montos" />
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="{i18n>lineaCrAfec}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/LineaAcordada}" class="montos"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

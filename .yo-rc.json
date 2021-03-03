@@ -1,0 +1,16 @@
+{
+  "generator-easy-ui5": {
+    "projectname": "appCtaCorriente",
+    "namespace": "profertil",
+    "platform": "SAP Cloud Platform Launchpad",
+    "viewtype": "XML",
+    "viewname": "MainView",
+    "ui5libs": "Content delivery network (SAPUI5)",
+    "newdir": true,
+    "namespaceURI": "profertil",
+    "uimodules": [
+      "uimodule"
+    ],
+    "setupCompleted": true
+  }
+}

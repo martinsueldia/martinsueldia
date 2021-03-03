@@ -1,0 +1,54 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core"
+  height="100%">
+<Table id="idSaldoCerLinTable" inset="false" width="50%">
+		<columns>
+			<Column
+				minScreenWidth=""
+				demandPopin="true">
+				<Text text="{i18n>descripcion}" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End">
+				<Text text="{i18n>montos}" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{i18n>ceralPenFij}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/OpePFijar}" class="montos" />
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+		  	<cells>
+					<Text text="{i18n>ceralPenLiq}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/OpePFactu}" class="montos" />
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="{i18n>ceralLiqPend}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/OpePEntrega}" class="montos" />
+				</cells>
+			</ColumnListItem>
+		</items>
+  </Table>
+  	<Button type="Default"
+                      text="{i18n>detCereal}"
+                      press="onPressDetCanje"
+                      ariaDescribedBy="acceptButtonDescription genericButtonDescription"/>
+</core:FragmentDefinition>

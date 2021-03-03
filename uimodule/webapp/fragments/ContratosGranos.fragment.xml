@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+  height="100%">
+	<Table id="idContTratosTable" inset="false" width="50%">
+		<columns>
+			<Column
+        width="35em"
+				demandPopin="true">
+				<Text text="{i18n>descripcion}" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="{i18n>montos}" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{i18n>VencerFmax}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/ICerAVenc}" class="montos" />
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="{i18n>Vencido}" />
+				</cells>
+				<cells>
+					<Text
+						text="{ModelEstadoGral>/ModelEstadoGral/HCerVenc}" class="montos"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<Button type="Default"
+                      text="{i18n>detCerEnt}"
+                      press="onPressDetCanje"
+                      ariaDescribedBy="acceptButtonDescription genericButtonDescription"/>
+</core:FragmentDefinition>

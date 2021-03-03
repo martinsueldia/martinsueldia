@@ -1,0 +1,43 @@
+<mvc:View
+	  controllerName="profertil.appCtaCorriente.controller.DetalleNegocio"
+    id="view1"
+	  height="100%"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:ui="sap.ca.ui"
+		displayBlock="true">
+	<Shell id="shell">
+		<App id="App">
+			<semantic:FullscreenPage id="_IDGenFullscreenPage1" title="{i18n>detNegocio}"
+                               showNavButton="true" navButtonPress="onNavBack">
+				<semantic:content>
+					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
+						<smartTable:SmartTable id="negocioTabla"
+                        entitySet="det_negocioSet" smartFilterId="smartFilterBar"
+                        tableType="ResponsiveTable" useExportToExcel="true"
+                        editable="false" beforeExport="onBeforeExport"  header="{i18n>totalRegis}"
+                        useVariantManagement="false" useTablePersonalisation="true"
+                        showRowCount="true"
+                        enableAutoBinding="true"
+                        persistencyKey="SmartTableAnalytical_Explored"
+                        demandPopin="true"
+                        ignoredFields="Kunnr"
+                        requestAtLeastFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido"
+                        initiallyVisibleFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido">
+							<Table id="innerUi5Table" growing="true">
+								<ColumnListItem highlight="{path:'Vencido', formatter:'.formatRowHighlight'}"/>
+							</Table>
+							<smartTable:layoutData>
+								<FlexItemData
+									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
+								</smartTable:layoutData>
+							</smartTable:SmartTable>
+						</ScrollContainer>
+					</semantic:content>
+				</semantic:FullscreenPage>
+			</App>
+		</Shell>
+	</mvc:View>

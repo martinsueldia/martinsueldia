@@ -1,0 +1,17 @@
+{
+  "welcomeFile": "/flpSandbox.html",
+  "routes": [
+    {
+      "authenticationType": "none",
+      "csrfProtection": false,
+      "source": "^/sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/",
+      "destination": "DesarrolloCF"
+    },
+    {
+      "source": "^(.*)",
+      "target": "$1",
+      "authenticationType": "xsuaa",
+      "service": "html5-apps-repo-rt"
+    }
+  ]
+}

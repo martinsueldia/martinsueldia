@@ -1,0 +1,190 @@
+{
+  "_version": "1.21.0",
+  "sap.app": {
+    "id": "profertil.appCtaCorriente",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "crossNavigation": {
+      "inbounds": {
+        "intent1": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "CuentaCorriente",
+          "action": "display",
+          "title": "Cuenta Corriente"
+        }
+      }
+    },
+    "dataSources": {
+      "ZSV_CTA_CORRIENTE_SRV": {
+        "uri": "/sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "rootView": {
+      "viewName": "profertil.appCtaCorriente.view.MainView",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    },
+    "dependencies": {
+      "minUI5Version": "1.60.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "profertil.appCtaCorriente.i18n.i18n"
+        }
+      },
+      "ModelEstadoGral": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
+      },
+      "ModelFecAc": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
+      },
+      "": {
+        "dataSource": "ZSV_CTA_CORRIENTE_SRV",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "profertil.appCtaCorriente.view",
+        "controlAggregation": "pages",
+        "controlId": "App",
+        "targetControl": "App",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "RouteMainView",
+          "pattern": "RouteMainView",
+          "target": [
+            "TargetMainView"
+          ]
+        },
+        {
+          "name": "RouteDetCta",
+          "pattern": "RouteDetCta",
+          "target": [
+            "TargetDetCta"
+          ]
+        },
+        {
+          "name": "RouteDetCheques",
+          "pattern": "RouteDetCheques",
+          "target": [
+            "TargetDetCheques"
+          ]
+        },
+        {
+          "name": "RouteDetCanje",
+          "pattern": "RouteDetCanje",
+          "target": [
+            "TargetDetCanje"
+          ]
+        },
+        {
+          "name": "RouteNegocio",
+          "pattern": "RouteNegocio",
+          "target": [
+            "TargetNegocio"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMainView": {
+          "viewType": "XML",
+          "viewLevel": 1,
+          "viewId": "MainView",
+          "viewName": "MainView"
+        },
+        "TargetDetCta": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetalleCtaCorriente",
+          "viewName": "DetalleCtaCorriente"
+        },
+        "TargetDetCheques": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetalleCheques",
+          "viewName": "DetalleCheques"
+        },
+        "TargetDetCanje": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetalleCanje",
+          "viewName": "DetalleCanje"
+        },
+        "TargetNegocio": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetalleNegocio",
+          "viewName": "DetalleNegocio"
+        }
+      }
+    }
+  },
+  "sap.cloud": {
+    "service": "appCtaCorriente.service"
+  }
+}

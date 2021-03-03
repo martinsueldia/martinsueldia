@@ -1,0 +1,115 @@
+<mvc:View
+	id="view1"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:layout="sap.ui.layout"
+	xmlns:semantic="sap.f.semantic"
+	controllerName="profertil.appCtaCorriente.controller.MainView">
+	<Shell id="shell">
+		<App id="App">
+			<semantic:SemanticPage id="mySemanticPage" headerPinnable="true" toggleHeaderOnTitleClick="true"
+		                         preserveHeaderStateOnScroll="false" titleAreaShrinkRatio="1:1.6:1.6"
+		                         showFooter="false">
+				<semantic:titleHeading>
+					<Title id="idTitle" text="{i18n>title} {ModelFecAc>/ModelFecAc/fechaActual}"/>
+				</semantic:titleHeading>
+				<!-- Title Snapped On Mobile Content-->
+				<semantic:titleSnappedOnMobile>
+					<Title id="_IDGenTitle1" text="Detalle cuenta corriente"/>
+				</semantic:titleSnappedOnMobile>
+				<!-- Title Content-->
+				<semantic:titleContent>
+					<!--	<Image src="./test-resources/sap/f/images/KPI.png" tooltip="This is just a placeholder, not a real KPI control." height="2rem" width="3.5rem"/>-->
+				</semantic:titleContent>
+				<semantic:titleCustomTextActions>
+					<Button id="btnCliente" text="{i18n>Cliente}: 100027 - Yara" />
+				</semantic:titleCustomTextActions>
+				<!-- Header Content -->
+				<semantic:headerContent>
+				</semantic:headerContent>
+				<!-- Content -->
+				<semantic:content>
+					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
+            <l:Grid>
+							<l:content>
+								<VBox>
+									<Title class="title" level="H1" text="{i18n>estGenral} {ModelEstadoGral>/ModelEstadoGral/FSaldoVencido}" />
+									<Panel  expandable="true" headerText="{i18n>saldoFin}  USD {ModelEstadoGral>/ModelEstadoGral/TotalSaldoFin}"  class="sapUiResponsiveMargin">
+										<content>
+											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.EstadoGeneral" type="XML"/>
+										</content>
+									</Panel>
+									<Panel expandable="true" width="100em" headerText="{i18n>saldoCer} USD {ModelEstadoGral>/ModelEstadoGral/TotalSaldoCereal}"  class="sapUiResponsiveMargin">
+										<content>
+											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.SaldoCereal" type="XML"/>
+										</content>
+									</Panel>
+									<Panel expandable="false" headerText="{i18n>cupoSol} USD {ModelEstadoGral>/ModelEstadoGral/TotalCupos}"  class="sapUiResponsiveMargin"/>
+									<layoutData>
+										<l:GridData span="L12 M12 S12" />
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Title class="title" level="H1" text="{i18n>estLinea}" />
+									<Panel expandable="true" headerText="{i18n>lineaCred} USD {ModelEstadoGral>/ModelEstadoGral/LineaDisponible}"  class="sapUiResponsiveMargin">
+										<content>
+											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.EstadoLinea" type="XML"/>
+										</content>
+									</Panel>
+									<layoutData>
+										<l:GridData span="L12 M12 S12" />
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Title class="title" level="H1" text="{i18n>acuerdos}" />
+									<Panel expandable="true" headerText="{i18n>totalAcuer} USD {ModelEstadoGral>/ModelEstadoGral/TotalNegocio}"  class="sapUiResponsiveMargin">
+										<content>
+											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.NegociosCompro" type="XML"/>
+										</content>
+									</Panel>
+									<layoutData>
+										<l:GridData span="L12 M12 S12" />
+									</layoutData>
+								</VBox>
+								<VBox>
+									<Title class="title" level="H1" text="{i18n>movConf}" />
+									<Panel expandable="true" headerText="{i18n>contratos} USD {ModelEstadoGral>/ModelEstadoGral/TotalContratos}"  class="sapUiResponsiveMargin">
+										<content>
+											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.ContratosGranos" type="XML"/>
+										</content>
+                  </Panel>
+                  <Panel expandable="true" headerText="{i18n>cheques} USD {ModelEstadoGral>/ModelEstadoGral/TotalCheques}"  class="sapUiResponsiveMargin">
+										<content>
+                      <core:Fragment fragmentName="profertil.appCtaCorriente.fragments.ChequeDiferidos" type="XML"/>
+										</content>
+									</Panel>
+									<layoutData>
+										<l:GridData span="L12 M12 S12" />
+									</layoutData>
+								</VBox>
+							</l:content>
+            </l:Grid>
+				<Button text="{i18n>mercaderia}"
+						press="onPress"
+						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</Button>
+					</ScrollContainer>
+				</semantic:content>
+				<!-- Semantic Footer Buttons -->
+				<semantic:footerCustomActions></semantic:footerCustomActions>
+				<semantic:messagesIndicator>
+					<semantic:MessagesIndicator id="_IDGenMessagesIndicator1" press="onMessagesButtonPress"/>
+				</semantic:messagesIndicator>
+				<!-- Custom Footer Content-->
+			</semantic:SemanticPage>
+		</App>
+	</Shell>
+</mvc:View>
