@@ -8,26 +8,31 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:layout="sap.ui.layout"
-	xmlns:semantic="sap.f.semantic"
+  xmlns:semantic="sap.f.semantic"
 	controllerName="profertil.appCtaCorriente.controller.MainView">
 	<Shell id="shell">
 		<App id="App">
-			<semantic:SemanticPage id="mySemanticPage" headerPinnable="true" toggleHeaderOnTitleClick="true"
+			<semantic:SemanticPage id="mySemanticPage" headerExpanded="true" headerPinnable="true" toggleHeaderOnTitleClick="true"
 		                         preserveHeaderStateOnScroll="false" titleAreaShrinkRatio="1:1.6:1.6"
 		                         showFooter="false">
 				<semantic:titleHeading>
-					<Title id="idTitle" text="{i18n>title} {ModelFecAc>/ModelFecAc/fechaActual}"/>
+        <VBox>
+        	<Title id="idTitle" text="{i18n>title} {ModelFecAc>/ModelFecAc/fechaActual}" class="sapUiSmallMarginBottom"/>
+          <Label id="_IDGenLabel1" text="Número de Cliente:"/>
+          <Input id="Cliente"  value="{oModelCliente>/Cliente}" maxLength="6" width="50%" placeholder="Ingrese Número de Cliente" change="onCliente" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handleValueHelpCliente"/>
+        </VBox>
 				</semantic:titleHeading>
+
 				<!-- Title Snapped On Mobile Content-->
 				<semantic:titleSnappedOnMobile>
-					<Title id="_IDGenTitle1" text="Detalle cuenta corriente"/>
+					<Title text="Detalle cuenta corriente"/>
 				</semantic:titleSnappedOnMobile>
 				<!-- Title Content-->
 				<semantic:titleContent>
 					<!--	<Image src="./test-resources/sap/f/images/KPI.png" tooltip="This is just a placeholder, not a real KPI control." height="2rem" width="3.5rem"/>-->
 				</semantic:titleContent>
 				<semantic:titleCustomTextActions>
-					<Button id="btnCliente" text="{i18n>Cliente}: 100027 - Yara" />
+					<Button id="btnCliente" text="Cliente : {oModelCliente>/Cliente}"/>
 				</semantic:titleCustomTextActions>
 				<!-- Header Content -->
 				<semantic:headerContent>
@@ -38,25 +43,25 @@
             <l:Grid>
 							<l:content>
 								<VBox>
-									<Title class="title" level="H1" text="{i18n>estGenral} {ModelEstadoGral>/ModelEstadoGral/FSaldoVencido}" />
-									<Panel  expandable="true" headerText="{i18n>saldoFin}  USD {ModelEstadoGral>/ModelEstadoGral/TotalSaldoFin}"  class="sapUiResponsiveMargin">
+									<Title class="title" level="H1" text="{i18n>estGenral} {path: 'ModelEstadoGral>/ModelEstadoGral/FSaldoVencido', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" />
+									  <Panel expandable="true" headerText="{i18n>saldoFin}  USD {path: 'ModelEstadoGral>/ModelEstadoGral/TotalSaldoFin', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin">
 										<content>
 											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.EstadoGeneral" type="XML"/>
 										</content>
 									</Panel>
-									<Panel expandable="true" width="100em" headerText="{i18n>saldoCer} USD {ModelEstadoGral>/ModelEstadoGral/TotalSaldoCereal}"  class="sapUiResponsiveMargin">
+									<Panel expandable="true" headerText="{i18n>saldoCer} USD {path: 'ModelEstadoGral>/ModelEstadoGral/TotalSaldoCereal', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin">
 										<content>
 											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.SaldoCereal" type="XML"/>
 										</content>
 									</Panel>
-									<Panel expandable="false" headerText="{i18n>cupoSol} USD {ModelEstadoGral>/ModelEstadoGral/TotalCupos}"  class="sapUiResponsiveMargin"/>
+									<Panel expandable="false" headerText="{i18n>cupoSol} USD {path: 'ModelEstadoGral>/ModelEstadoGral/TotalCupos', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin"/>
 									<layoutData>
 										<l:GridData span="L12 M12 S12" />
 									</layoutData>
 								</VBox>
 								<VBox>
 									<Title class="title" level="H1" text="{i18n>estLinea}" />
-									<Panel expandable="true" headerText="{i18n>lineaCred} USD {ModelEstadoGral>/ModelEstadoGral/LineaDisponible}"  class="sapUiResponsiveMargin">
+									<Panel expandable="true" headerText="{i18n>lineaCred} USD {path: 'ModelEstadoGral>/ModelEstadoGral/LineaDisponible', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin">
 										<content>
 											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.EstadoLinea" type="XML"/>
 										</content>
@@ -67,7 +72,7 @@
 								</VBox>
 								<VBox>
 									<Title class="title" level="H1" text="{i18n>acuerdos}" />
-									<Panel expandable="true" headerText="{i18n>totalAcuer} USD {ModelEstadoGral>/ModelEstadoGral/TotalNegocio}"  class="sapUiResponsiveMargin">
+									<Panel expandable="true" headerText="{i18n>totalAcuer} USD  {path: 'ModelEstadoGral>/ModelEstadoGral/TotalNegocio', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin">
 										<content>
 											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.NegociosCompro" type="XML"/>
 										</content>
@@ -78,15 +83,15 @@
 								</VBox>
 								<VBox>
 									<Title class="title" level="H1" text="{i18n>movConf}" />
-									<Panel expandable="true" headerText="{i18n>contratos} USD {ModelEstadoGral>/ModelEstadoGral/TotalContratos}"  class="sapUiResponsiveMargin">
+									<Panel expandable="true" headerText="{i18n>contratos} USD {path: 'ModelEstadoGral>/ModelEstadoGral/TotalContratos', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin">
 										<content>
 											<core:Fragment fragmentName="profertil.appCtaCorriente.fragments.ContratosGranos" type="XML"/>
 										</content>
-                  </Panel>
-                  <Panel expandable="true" headerText="{i18n>cheques} USD {ModelEstadoGral>/ModelEstadoGral/TotalCheques}"  class="sapUiResponsiveMargin">
-										<content>
-                      <core:Fragment fragmentName="profertil.appCtaCorriente.fragments.ChequeDiferidos" type="XML"/>
-										</content>
+                                    </Panel>
+                                    <Panel expandable="true" headerText="{i18n>cheques} USD {path: 'ModelEstadoGral>/ModelEstadoGral/TotalCheques', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"  class="sapUiResponsiveMargin">
+                                                            <content>
+                                        <core:Fragment fragmentName="profertil.appCtaCorriente.fragments.ChequeDiferidos" type="XML"/>
+                                                            </content>
 									</Panel>
 									<layoutData>
 										<l:GridData span="L12 M12 S12" />
@@ -94,6 +99,7 @@
 								</VBox>
 							</l:content>
             </l:Grid>
+       <VBox>
 				<Button text="{i18n>mercaderia}"
 						press="onPress"
 						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
@@ -101,12 +107,20 @@
 						<FlexItemData growFactor="1" />
 					</layoutData>
 				</Button>
+        <Button text="Informar Pagos"
+						press="onPressPagos"
+						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</Button>
+        </VBox>
 					</ScrollContainer>
 				</semantic:content>
 				<!-- Semantic Footer Buttons -->
 				<semantic:footerCustomActions></semantic:footerCustomActions>
 				<semantic:messagesIndicator>
-					<semantic:MessagesIndicator id="_IDGenMessagesIndicator1" press="onMessagesButtonPress"/>
+					<semantic:MessagesIndicator press="onMessagesButtonPress"/>
 				</semantic:messagesIndicator>
 				<!-- Custom Footer Content-->
 			</semantic:SemanticPage>

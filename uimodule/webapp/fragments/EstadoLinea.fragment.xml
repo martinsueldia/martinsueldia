@@ -4,36 +4,37 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
   height="100%">
-	<Table id="idEstadoLineaTable" inset="false" width="50%">
+	<Table id="idEstadoLineaTable" inset="false">
 		<columns>
 			<Column
         width="35em"
 				demandPopin="true">
-				<Text text="{i18n>descripcion}" />
+				<Text text="{i18n>descripcion}"/>
 			</Column>
 			<Column
 				minScreenWidth="Tablet"
-				demandPopin="true">
-				<Text text="{i18n>montos}" />
+				demandPopin="true"
+        hAlign="End">
+				<Text text="{i18n>montos}"/>
 			</Column>
 		</columns>
 		<items>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>lineaCrAco}" />
+					<Text text="{i18n>lineaCrAco}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/LineaAfectada}" class="montos" />
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/LineaAcordada', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>lineaCrAfec}" />
+					<Text text="{i18n>lineaCrAfec}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/LineaAcordada}" class="montos"/>
+						text="{ path: 'ModelEstadoGral>/ModelEstadoGral/LineaAfectada', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -2,73 +2,73 @@
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
-	<Table id="idEstadoTable" width="50%"
+	<Table id="idEstadoTable"
 		inset="false">
 		<columns>
 			<Column
-				minScreenWidth="">
-				<Text text="{i18n>descripcion}" />
+				width="auto">
+				<Text text="{i18n>descripcion}"/>
 			</Column>
 			<Column
-				minScreenWidth="Tablet"
+				width="auto"
 				demandPopin="true"
 				hAlign="End">
-				<Text text="{i18n>montos}" />
+				<Text text="{i18n>montos}"/>
 			</Column>
 		</columns>
 		<items>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>saldoComp}" />
+					<Text text="{i18n>saldoComp}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/ASaldoCc}" class="montos" />
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/ASaldoCc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>factVenc}" />
+					<Text text="{i18n>factVenc}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/FactVencidas}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactVencidas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>facAntVda}" />
+					<Text text="{i18n>facAntVda}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/FactAntVencidas}" class="montos" />
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAntVencidas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>pagos}" />
+					<Text text="{i18n>pagos}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/Pagos}" class="montos" />
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/Pagos', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
-			<ColumnListItem>
+			<ColumnListItem >
 				<cells>
-					<Text text="{i18n>factVencer}" />
+					<Text  text="{i18n>factVencer}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/FactAVencer}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
-			<ColumnListItem>
+			<ColumnListItem >
 				<cells>
-					<Text text="{i18n>factAntVen}" />
+					<Text text="{i18n>factAntVen}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/FactAntAVencer}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAntAVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

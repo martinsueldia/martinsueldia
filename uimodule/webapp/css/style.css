@@ -13,9 +13,13 @@
 
 .sapMPanel .sapMPanelHdr{
        font-size:14px     !important;
+       color: blueviolet!important;
   }
 
 .montos{
   font-weight: bold !important;
 }
 
+.myPanel{
+  color: green;
+}

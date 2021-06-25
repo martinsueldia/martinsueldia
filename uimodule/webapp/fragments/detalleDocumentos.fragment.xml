@@ -1,0 +1,70 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core">
+  <Dialog id="dialogDocumentos" title="CJ y CD asociados" contentWidth="90%">
+    <l:Grid defaultSpan="L12 M12 S12" width="auto">
+      <l:content>
+	<smartFilterBar:SmartFilterBar id="smartFilterBarDocs" entitySet="docAsociadosSet">
+							<smartFilterBar:controlConfiguration>
+                <smartFilterBar:ControlConfiguration id="NroComprobante" key="NroComprobante" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
+                <smartFilterBar:ControlConfiguration id="carta_de_porte" key="carta_de_porte" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
+							</smartFilterBar:controlConfiguration>
+							<smartFilterBar:layoutData>
+								<FlexItemData shrinkFactor="0"/>
+							</smartFilterBar:layoutData>
+						</smartFilterBar:SmartFilterBar>
+						<smartTable:SmartTable id="detalleDocs" width="100%"
+                        entitySet="docAsociadosSet" smartFilterId="smartFilterBarDocs"
+                        tableType="ResponsiveTable" useExportToExcel="true"
+                        editable="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTableDocs"  header="{i18n>totalRegis}"
+                        useVariantManagement="false" useTablePersonalisation="true"
+                        showRowCount="true"
+                        demandPopin="true"
+                        enableAutoBinding="true"
+                        ignoredFields="bzirk,name1"
+                        requestAtLeastFields="NroComprobante,Kunnr,carta_de_porte,fecha,tn,bukrs,gjahr,belnr,name1"
+                        initiallyVisibleFields="NroComprobante,Kunnr,carta_de_porte,fecha,tn,bukrs,gjahr,belnr">
+							<smartTable:layoutData>
+								<FlexItemData
+									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
+								</smartTable:layoutData>
+                    <Table>
+                        <columns>
+                        <Column  width="100px" hAlign="Begin">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "fecha", "leadingProperty": "fecha", "sortProperty": "fecha", "columnIndex":"4"}'/>
+                        </customData>
+                        <Text text="Fecha"/>
+                       </Column>
+                        <Column width="100px" hAlign="Begin">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "bzirk", "leadingProperty": "bzirk", "sortProperty": "bzirk", "columnIndex":"9"}'/>
+                        </customData>
+                        <Text text="Descargar Documento"/>
+                       </Column>
+                        </columns>
+                        <items>
+                        <ColumnListItem>
+                        <cells>
+                          <Text text ="{ path: 'fecha' , type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium', source: { pattern: 'dd/MM/yyyy' } } }"/>
+                          <!--<Link id="_IDGenLink1" text="{belnr}" press="onPressEntregas"/>-->
+                           <!--<Button id="_IDGenButton1" press="onPressEntregas" icon="sap-icon://pdf-attachment" visible="true" type="Emphasized"/>-->
+                           <ObjectStatus icon="sap-icon://pdf-attachment" active="true" press="onPressEntregas"/>
+                           </cells>
+                        </ColumnListItem>
+                        </items>
+                        </Table>
+							</smartTable:SmartTable>
+      </l:content>
+    </l:Grid>
+  <buttons>
+    <Button text="Cerrar" press="onCancelarDcumentos" type="Default"/>
+  </buttons>
+  </Dialog>
+</core:FragmentDefinition>

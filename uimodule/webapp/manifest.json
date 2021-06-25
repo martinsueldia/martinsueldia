@@ -18,17 +18,25 @@
           },
           "semanticObject": "CuentaCorriente",
           "action": "display",
-          "title": "Cuenta Corriente"
+          "title": "Cuenta Corriente",
+          "icon": "sap-icon://customer-financial-fact-sheet"
         }
       }
     },
     "dataSources": {
       "ZSV_CTA_CORRIENTE_SRV": {
-        "uri": "/sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/",
+        "uri": "sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
+        }
+      },
+      "RelatedDocs": {
+        "uri": "sap/opu/odata/sap/ZSV_RELATED_DOCS_SRV/",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/ZSV_RELATED_DOCS_SRV/metadata.xml"
         }
       }
     }
@@ -86,6 +94,16 @@
         "settings": {},
         "preload": false
       },
+      "relatedDocs": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "preload": true
+        },
+        "dataSource": "RelatedDocs"
+      },
       "": {
         "dataSource": "ZSV_CTA_CORRIENTE_SRV",
         "preload": true,
@@ -116,7 +134,7 @@
       "routes": [
         {
           "name": "RouteMainView",
-          "pattern": "RouteMainView",
+          "pattern": "",
           "target": [
             "TargetMainView"
           ]

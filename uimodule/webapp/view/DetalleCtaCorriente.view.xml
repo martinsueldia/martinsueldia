@@ -2,46 +2,125 @@
 	  controllerName="profertil.appCtaCorriente.controller.DetalleCtaCorriente"
     id="view1"
 	  height="100%"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:semantic="sap.m.semantic"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:semantic="sap.m.semantic"
 		displayBlock="true">
 	<Shell id="shell">
 		<App id="App">
-			<semantic:FullscreenPage id="_IDGenFullscreenPage1" title="{i18n>detCtaCor}"
+			<semantic:FullscreenPage title="{i18n>detCtaCor}"
                                showNavButton="true" navButtonPress="onNavBack">
 				<semantic:content>
-					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
-						<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="cta_det_salSet" >
-							<smartFilterBar:controlConfiguration>
-                <smartFilterBar:ControlConfiguration id="FechaMov" key="FechaMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-              </smartFilterBar:controlConfiguration>
-							<!-- layout data used to make the table growing but the filter bar fixed -->
-							<smartFilterBar:layoutData>
-								<FlexItemData shrinkFactor="0"/>
-							</smartFilterBar:layoutData>
-						</smartFilterBar:SmartFilterBar>
+
+          <HBox backgroundDesign="Solid" id="_IDGenHBox1" justifyContent="Center">
+              <HBox>
+                    <VBox direction="Row" alignItems="Center">
+                    <Label id="_IDGenLabel1" text="Saldo Cuenta Corriente a:"  class="sapUiTinyMarginEnd"/>
+                      <DatePicker
+                        id="DP1"
+                        placeholder="Ingresar Fecha"
+                        width="150px"
+                        class="sapUiTinyMarginEnd"/>
+                    </VBox>
+                    <VBox>
+                      <Button text="Buscar" press="onChangeFechaSaldo" />
+                    </VBox>
+              </HBox>
+
+              <HBox id="_IDGenHBox2">
+                    <VBox id="_IDGenVBox2" direction="Row" alignItems="Center" class="sapUiSmallMarginBegin">
+                      <Label id="_IDGenLabel3"  text="Movimiento Desde:"  class="sapUiTinyMarginEnd"/>
+                      <DatePicker id="FechaDesdeID"
+                                  placeholder="Ingresar Fecha"
+                                  width="150px"
+                                  class="sapUiTinyMarginEnd"/>
+                    </VBox>
+
+                    <VBox id="_IDGenVBox1" direction="Row" alignItems="Center" class="sapUiTinyMarginBegin">
+                          <Label id="_IDGenLabel2"  text="Movimiento Hasta:"  class="sapUiTinyMarginEnd"/>
+                            <DatePicker id="FechaHastaID"
+                                        placeholder="Ingresar Fecha"
+                                        width="150px"
+                                        class="sapUiTinyMarginEnd"/>
+                          <Button id="_IDGenButton1" text="Buscar" press="handleChange" />
+                    </VBox>
+
+              </HBox>
+          </HBox>
+          <!--<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="true" >-->
 						<smartTable:SmartTable id="detalleCtaCorrTabla"
-                        entitySet="cta_det_salSet" smartFilterId="smartFilterBar"
-                        tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport"  header="{i18n>totalRegis}"
-                        useVariantManagement="false" useTablePersonalisation="true"
+                        width="100%"
+                        entitySet="cta_det_salSet"
+                        smartFilterId="smartFilterBar"
+                        useExportToExcel="true"
+                        editable="false"
+                        beforeRebindTable="onBeforeRebindTable"
+                        beforeExport="onBeforeExport"
+                        header="{i18n>totalRegis}"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
                         showRowCount="true"
                         demandPopin="true"
+                        showFullScreenButton="true"
+                        class="sapUiResponsiveContentPadding"
                         enableAutoBinding="true"
-                        ignoredFields="Kunnr,FechaMov,FechaSaldo"
-                        requestAtLeastFields="Item,Blart,BlartTxt,Zuonr,Budat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe"
-                        initiallyVisibleFields="Item,Blart,BlartTxt,Zuonr,Budat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe">
-							<smartTable:layoutData>
-								<FlexItemData
-									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
-								</smartTable:layoutData>
+                        ignoredFields="Item,Kunnr,FechaSaldo,FechaMovDesde,FechaMovHasta,FechaMov"
+                        requestAtLeastFields="Item,Blart,BlartTxt,Zuonr,Budat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe,FechaMovDesde,FechaMovHasta"
+                        initiallyVisibleFields="Item,Blart,BlartTxt,Zuonr,Budat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe,FechaMovDesde,FechaMovHasta">
+                        <smartTable:layoutData>
+                        <FlexItemData xmlns="sap.m" id="FlexItemData" baseSize="0%"/>
+                      </smartTable:layoutData>
+                      <smartTable:customToolbar>
+                      <OverflowToolbar xmlns="sap.m" design="Transparent">
+                      <ToolbarSpacer/>
+                      <ToggleButton text="Saldo Acumulado" enabled="true" pressed="false" press="onSaldo" visible="{ctaView>/showBotonSaldo}"/>
+                      </OverflowToolbar>
+                      </smartTable:customToolbar>
+                        <Table id="_detalleCtaCorriente" updateFinished="onTableUpdateFinishedddd" growingThreshold="99999999" growing="true">
+                        <columns>
+                        <Column width="50px" hAlign="Begin">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "FechaSaldo", "leadingProperty": "FechaSaldo"}'/>
+                        </customData>
+                        <Text  text="Doc"/>
+                        </Column>
+                      <Column  width="150px" hAlign="End">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Zuonr", "leadingProperty": "Zuonr", "sortProperty": "Zuonr", "filterProperty": "Zuonr" , "columnIndex": 1}'/>
+                          </customData>
+                          <Label text="Nro. Comprobante"/>
+                        </Column>
+                       <Column   hAlign="End">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Blart", "leadingProperty": "Blart", "sortProperty": "Blart", "filterProperty": "Blart" , "columnIndex": 2}'/>
+                          </customData>
+                          <Label text="Tipo Doc."/>
+                        </Column>
+                        <Column   hAlign="End">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "BlartTxt", "leadingProperty": "BlartTxt", "sortProperty": "BlartTxtBlartTxt", "filterProperty": "Zuonr" , "columnIndex": 3}'/>
+                          </customData>
+                          <Label text="Concepto"/>
+                        </Column>
+                        </columns>
+                        <items>
+                        <ColumnListItem>
+                        <cells>
+                          <ObjectStatus icon="sap-icon://pdf-attachment" active="true" press="onPdfDocumento"/>
+                          <ObjectStatus icon="sap-icon://detail-view" text="{Zuonr}" active="true" press="onPressComprobante"/>
+                          <ObjectAttribute text="{Blart}"/>
+                          <ObjectStatus text="{BlartTxt}" active="false" press=".onSaldo" state="None"/>
+                        </cells>
+                        </ColumnListItem>
+                        </items>
+                        </Table>
 							</smartTable:SmartTable>
-						</ScrollContainer>
+						<!--</ScrollContainer>-->
 					</semantic:content>
 				</semantic:FullscreenPage>
 			</App>

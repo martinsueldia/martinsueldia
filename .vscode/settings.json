@@ -1,3 +1,12 @@
 {
-    "[xml].editor.defaultFormatter": "sapse.sap-ux-annotation-modeler-extension"
+    "[xml].editor.defaultFormatter": "sapse.sap-ux-annotation-modeler-extension",
+    "css.completion.completePropertyWithSemicolon": false,
+    "css.completion.triggerPropertyValueCompletion": false,
+    "debug.javascript.suggestPrettyPrinting": false,
+    "editor.comments.insertSpace": false,
+    "editor.copyWithSyntaxHighlighting": false,
+    "editor.semanticHighlighting.enabled": false,
+    "editor.showUnused": false,
+    "editor.suggest.filterGraceful": false,
+    "editor.suggest.hideStatusBar": false
 }

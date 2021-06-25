@@ -40,6 +40,46 @@
       },
       "envFile": "${workspaceFolder}/uimodule/.env8",
       "preLaunchTask": "Build profertil.appCtaCorriente"
+    },
+    {
+      "name": "Run profertil.appCtaCorriente-uimodule",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/profertilappCtaCorriente/index.html",
+        "--ui5",
+        "{\"version\":\".\"}"
+      ],
+      "cwd": "${workspaceFolder}/uimodule",
+      "env": {
+        "PORT": "6004",
+        "MOCK_LOOKUP_DIRS": "[\"webapp\"]",
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnableId\":\"/home/user/profertil.appCtaCorriente/uimodule\"}"
+      },
+      "envFile": "${workspaceFolder}/uimodule/.env16",
+      "preLaunchTask": "Build profertil.appCtaCorriente"
+    },
+    {
+      "name": "Run profertil.appCtaCorriente-uimodule",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/profertilappCtaCorriente/index.html",
+        "--ui5",
+        "{\"version\":\".\"}"
+      ],
+      "cwd": "${workspaceFolder}/uimodule",
+      "env": {
+        "PORT": "6004",
+        "MOCK_LOOKUP_DIRS": "[\"webapp\"]",
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnableId\":\"/home/user/profertil.appCtaCorriente/uimodule\"}"
+      },
+      "envFile": "${workspaceFolder}/uimodule/.env23",
+      "preLaunchTask": "Build profertil.appCtaCorriente"
     }
   ]
 }

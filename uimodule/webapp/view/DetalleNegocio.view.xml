@@ -11,14 +11,13 @@
 		displayBlock="true">
 	<Shell id="shell">
 		<App id="App">
-			<semantic:FullscreenPage id="_IDGenFullscreenPage1" title="{i18n>detNegocio}"
+			<semantic:FullscreenPage title="{i18n>detNegocio}"
                                showNavButton="true" navButtonPress="onNavBack">
 				<semantic:content>
-					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
-						<smartTable:SmartTable id="negocioTabla"
+						<smartTable:SmartTable id="negocioTabla" width="100%"
                         entitySet="det_negocioSet" smartFilterId="smartFilterBar"
                         tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport"  header="{i18n>totalRegis}"
+                        editable="false" beforeExport="onBeforeExport"  beforeRebindTable="onBeforeRebindTable" header="{i18n>totalRegis}"
                         useVariantManagement="false" useTablePersonalisation="true"
                         showRowCount="true"
                         enableAutoBinding="true"
@@ -27,15 +26,47 @@
                         ignoredFields="Kunnr"
                         requestAtLeastFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido"
                         initiallyVisibleFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido">
-							<Table id="innerUi5Table" growing="true">
-								<ColumnListItem highlight="{path:'Vencido', formatter:'.formatRowHighlight'}"/>
-							</Table>
+                        <ScrollContainer id="containerForm2" width="100%" horizontal="false" vertical="true">
+                        <Table growingThreshold="99999999" growing="true">
+                          <columns>
+                            <Column width="50px" hAlign="Begin">
+                            <customData>
+                            <core:CustomData key="p13nData"
+                            value='\{"columnKey": "Kunnr", "leadingProperty": "Kunnr"}'/>
+                            </customData>
+                            <Text  text="Doc"/>
+                            </Column>
+                            <Column   width="120px" hAlign="Begin">
+                           <customData>
+                              <core:CustomData key="p13nData" value='\{"columnKey": "Vbeln", "leadingProperty": "Vbeln", "sortProperty": "Vbeln", "filterProperty":  "Vbeln" }'/>
+                        </customData>
+                            <Text text="Negocio"/>
+                            </Column>
+                            <Column   width="120px" hAlign="Begin">
+                           <customData>
+                              <core:CustomData key="p13nData" value='\{"columnKey": "Bstdk", "leadingProperty": "Bstdk", "sortProperty": "Bstdk", "filterProperty":  "Bstdk", "columnIndex": 3 }'/>
+                        </customData>
+                            <Text text="{/#det_negocio/Bstdk/@sap:label}"/>
+                            </Column>
+                        </columns>
+                            <items>
+                              <ColumnListItem  highlight="{path:'Vencido', formatter:'.formatRowHighlight'}">
+                               <cells>
+                                  <!--<Button id="_IDGenButton1" press="onPdfDocumentoNegocio" icon="sap-icon://pdf-attachment" visible="true" type="Emphasized"/>-->
+                                   <ObjectStatus  icon="sap-icon://pdf-attachment"  active="true" press="onPdfDocumentoNegocio"/>
+                                  <!--<Link id="_IDGenLink1" text="{Vbeln}" press="onPressNegocio"/>-->
+                                   <ObjectStatus icon="sap-icon://detail-view" text="{Vbeln}" active="true" press="onPressNegocio"/>
+                                   <ObjectAttribute text="{path:'Bstdk', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"/>
+                                </cells>
+                              </ColumnListItem>
+                           </items>
+                        </Table>
+                        </ScrollContainer>
 							<smartTable:layoutData>
 								<FlexItemData
 									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
 							</smartTable:SmartTable>
-						</ScrollContainer>
 					</semantic:content>
 				</semantic:FullscreenPage>
 			</App>

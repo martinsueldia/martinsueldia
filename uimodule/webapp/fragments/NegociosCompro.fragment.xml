@@ -2,36 +2,37 @@
 	xmlns="sap.m"
     height="100%"
 	xmlns:core="sap.ui.core">
-	<Table id="idAcuerdosdTable" inset="false" width="50%">
+	<Table id="idAcuerdosdTable" inset="false">
 		<columns>
 			<Column
         width="35em"
 				demandPopin="true">
-				<Text text="{i18n>descripcion}" />
+				<Text text="{i18n>descripcion}"/>
 			</Column>
 			<Column
 				minScreenWidth="Tablet"
-				demandPopin="true">
-				<Text text="{i18n>montos}" />
+				demandPopin="true"
+        hAlign="End">
+				<Text text="{i18n>montos}"/>
 			</Column>
 		</columns>
 		<items>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>acuerdosVenF}" />
+					<Text text="{i18n>acuerdosVenF}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/AVencer}" class="montos" />
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/AVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>acuerdosVen}" />
+					<Text text="{i18n>acuerdosVen}"/>
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/Vencidos}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/Vencidos', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

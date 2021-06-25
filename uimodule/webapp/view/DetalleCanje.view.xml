@@ -5,30 +5,41 @@
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:core="sap.ui.core"
+  xmlns:table="sap.ui.table"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:semantic="sap.m.semantic"
 		displayBlock="true">
 	<Shell id="shell">
 		<App id="App">
-			<semantic:FullscreenPage id="_IDGenFullscreenPage1" title="{i18n>detalleCereal}"
+			<semantic:FullscreenPage title="{i18n>detalleCereal}"
                                showNavButton="true" navButtonPress="onNavBack">
 				<semantic:content>
 					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
 						<smartFilterBar:SmartFilterBar id="smartFilterBarCanje" entitySet="det_cerealSet" >
 							<smartFilterBar:controlConfiguration>
                 <smartFilterBar:ControlConfiguration id="FechaMov" key="FechaMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-							</smartFilterBar:controlConfiguration>
+                <!--<smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>-->
+                <smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration2"  key="FechaSaldo" label="Saldo Cuenta Corriente a" visibleInAdvancedArea="true">
+     	          <smartFilterBar:customControl>
+                  <!--<Label id="_IDGenLabel1" text="simple DatePicker" labelFor="DP1"/>-->
+                      <DatePicker
+                        id="DP1"
+                        placeholder="Ingresar Fecha"
+                        change="onChangeFechaSaldoCereal"
+                        class="sapUiSmallMarginBottom"/>
+                </smartFilterBar:customControl>
+                  </smartFilterBar:ControlConfiguration>
+                  </smartFilterBar:controlConfiguration>
 							<!-- layout data used to make the table growing but the filter bar fixed -->
 							<smartFilterBar:layoutData>
 								<FlexItemData shrinkFactor="0"/>
 							</smartFilterBar:layoutData>
 						</smartFilterBar:SmartFilterBar>
-						<smartTable:SmartTable id="detalleCanje"
+						<smartTable:SmartTable id="detalleCanje" width="100%"
                         entitySet="det_cerealSet" smartFilterId="smartFilterBarCanje"
                         tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport"  header="{i18n>totalRegis}"
+                        editable="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable"  header="{i18n>totalRegis}"
                         useVariantManagement="false" useTablePersonalisation="true"
                         showRowCount="true"
                         demandPopin="true"
@@ -40,6 +51,34 @@
 								<FlexItemData
 									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
+                <Table growingThreshold="99999999" growing="true">
+                        <columns>
+                        <Column width="50px" hAlign="Begin">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "FechaSaldo", "leadingProperty": "FechaSaldo"}'/>
+                        </customData>
+                        <Text   text="Doc"/>
+                        </Column>
+                        <Column   width="100px" hAlign="Begin">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "Contrato", "leadingProperty": "Contrato", "sortProperty": "Contrato" , "filterProperty": "Contrato" }'/>
+                        </customData>
+                        <Text   text="Contrato"/>
+                        </Column>
+                        </columns>
+                        <items>
+                        <ColumnListItem>
+                        <cells>
+                          <!--<Button id="_IDGenButton1" press="onPdfDocumento" icon="sap-icon://pdf-attachment" visible="true" type="Emphasized"/>-->
+                           <ObjectStatus   icon="sap-icon://pdf-attachment"  active="true" press="onPdfDocumento"/>
+                          <!--<Link id="_IDGenLink1" text="{Contrato}" press="onPressNegocio"/>-->
+                          <ObjectStatus   icon="sap-icon://detail-view" text="{Contrato}" active="true" press="onPressNegocio"/>
+                        </cells>
+                        </ColumnListItem>
+                        </items>
+                        </Table>
 							</smartTable:SmartTable>
 						</ScrollContainer>
 					</semantic:content>

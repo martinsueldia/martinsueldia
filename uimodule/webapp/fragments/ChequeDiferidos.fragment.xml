@@ -4,16 +4,17 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
   height="100%">
-	<Table id="idChequeTable" inset="false" width="50%">
+	<Table id="idChequeTable" inset="false">
 		<columns>
 			<Column
         width="35em"
 				demandPopin="true">
-				<Text text="{i18n>descripcion}" />
+				<Text text="{i18n>descripcion}"/>
 			</Column>
 			<Column
 				minScreenWidth="Tablet"
-				demandPopin="true">
+				demandPopin="true"
+        hAlign="End">
 				<Text text="{i18n>montos}" />
 			</Column>
 		</columns>
@@ -24,7 +25,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/GSaldoRd}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/GSaldoRd', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
@@ -33,7 +34,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{ModelEstadoGral>/ModelEstadoGral/GSaldoRdRio}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/GSaldoRdRio', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -14,3 +14,9 @@ approuter/*/webapp/
 profertil.appCtaCorriente/.env
 # auto generated wildcard
 profertil.appCtaCorriente/uimodule/.env2
+# auto generated wildcard
+uimodule/.env1
+# auto generated wildcard
+uimodule/.env2
+# auto generated wildcard
+uimodule/.env3

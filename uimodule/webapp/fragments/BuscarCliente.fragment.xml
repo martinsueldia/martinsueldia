@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+  <Dialog title="Seleccione Cliente" contentHeight="100%" contentWidth="50%">
+		<VBox class="sapUiSmallMargin">
+			<OverflowToolbar>
+				<SearchField liveChange="onSearchCliente" width="40%"/>
+			</OverflowToolbar>
+			<List headerText="Cliente" selectionChange="_closeValueHelpCliente" id="componenteId" growing="true" items="{ path: '/ClientesSet', sorter: { path: 'Cliente' }, parameters: {operationMode: 'Client'} }">
+				<StandardListItem title="{Cliente}" press="_closeValueHelpCliente" info="{ClienteTexto}" type="Active"/>
+			</List>
+		</VBox>
+		<beginButton>
+			<Button text="Cerrar" press="_closeCliente" type="Emphasized"/>
+		</beginButton>
+	</Dialog>
+
+</core:FragmentDefinition>

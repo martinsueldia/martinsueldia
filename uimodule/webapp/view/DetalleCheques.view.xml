@@ -11,7 +11,7 @@
 		displayBlock="true">
    <Shell id="shell">
 		<App id="App">
-		<semantic:FullscreenPage id="_IDGenFullscreenPage1" title="{i18n>detChePago}"
+		<semantic:FullscreenPage  title="{i18n>detChePago}"
                                showNavButton="true" navButtonPress="onNavBack">
 				<semantic:content>
 					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
@@ -21,17 +21,26 @@
                 </smartFilterBar:ControlConfiguration>
                 <smartFilterBar:ControlConfiguration id="Report" key="Report" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
                 <smartFilterBar:ControlConfiguration id="FechMov" key="FechMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-              </smartFilterBar:controlConfiguration>
+                <!--<smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>-->
+                 <smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration3"  key="FechaSaldo" label="Saldo Cuenta Corriente" visibleInAdvancedArea="true">
+                 <smartFilterBar:customControl>
+                  <!--<Label id="_IDGenLabel1" text="simple DatePicker" labelFor="DP1"/>-->
+                      <DatePicker
+                        id="DP1"
+                        placeholder="Ingresar Fecha"
+                        change="onChangeFechaSaldoCheques"
+                        class="sapUiSmallMarginBottom"/>
+                </smartFilterBar:customControl>
+                  </smartFilterBar:ControlConfiguration></smartFilterBar:controlConfiguration>
 							<!-- layout data used to make the table growing but the filter bar fixed -->
 							<smartFilterBar:layoutData>
 								<FlexItemData shrinkFactor="0"/>
 							</smartFilterBar:layoutData>
 						</smartFilterBar:SmartFilterBar>
-            <smartTable:SmartTable id="chequeTabla"
+            <smartTable:SmartTable id="chequeTabla" width="100%"
                         entitySet="det_chequeSet" smartFilterId="smartFilterBar"
                         tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport"  header="{i18n>totalRegis}"
+                        editable="false" beforeExport="onBeforeExport"  beforeRebindTable="onBeforeRebindTable" header="{i18n>totalRegis}"
                         useVariantManagement="false" useTablePersonalisation="true"
                         showRowCount="true"
                         enableAutoBinding="true"
@@ -44,6 +53,7 @@
 								<FlexItemData
 									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
+                <Table growingThreshold="99999999" growing="true"/>
 							</smartTable:SmartTable>
 						</ScrollContainer>
 					</semantic:content>
