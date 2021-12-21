@@ -1,0 +1,113 @@
+<mvc:View xmlns:smartTable="sap.ui.comp.smarttable" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:ui="sap.ca.ui" controllerName="profertil.appCtaCorriente.controller.DetalleCreditoAcordada" id="view1" height="100%" displayBlock="true">
+		<App id="App">
+		<semantic:FullscreenPage title="{i18n>detlinAcordada}" showNavButton="true" navButtonPress="onNavBack">
+				<semantic:content>
+					<Bar id="bar0">
+					    <contentRight>
+					        <Button id="btnCliente" text="Cliente : {ModelEstadoGral>/ModelEstadoGral/Kunnr} - {ModelEstadoGral>/ModelEstadoGral/KunnrName1}" type="Transparent"/>
+					    </contentRight>
+					</Bar>
+					<ScrollContainer id="containerForm" width="100%" horizontal="true" vertical="false">
+			      <!-- <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="det_linacordadaSet"  enableBasicSearch="true" visible="false">
+							<smartFilterBar:controlConfiguration>
+                <smartFilterBar:ControlConfiguration id="multiCombo" visibleInAdvancedArea="true">
+                </smartFilterBar:ControlConfiguration>
+                <smartFilterBar:ControlConfiguration id="Report" key="Report" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"/>
+                <smartFilterBar:ControlConfiguration id="FechMov" key="FechMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"/>
+                 <smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration3" key="FechaSaldo" label="Saldo Cuenta Corriente" visibleInAdvancedArea="true">
+                 <smartFilterBar:customControl>
+                      <DatePicker id="DP1" placeholder="Ingresar Fecha" change="onChangeFechaSaldoCheques" class="sapUiSmallMarginBottom"/>
+                </smartFilterBar:customControl>
+                  </smartFilterBar:ControlConfiguration></smartFilterBar:controlConfiguration>
+							<smartFilterBar:layoutData>
+								<FlexItemData shrinkFactor="0"/>
+							</smartFilterBar:layoutData>
+						</smartFilterBar:SmartFilterBar> -->
+            <smartTable:SmartTable id="lineaAcordadaTabla"
+            width="100%"
+            entitySet="det_linacordadaSet"
+            smartFilterId="smartFilterBar"
+            tableType="ResponsiveTable"
+            useExportToExcel="true"
+            editable="false"
+            beforeExport="onBeforeExport"
+            beforeRebindTable="onBeforeRebindTable"
+            header="{i18n>totalRegis}"
+            useVariantManagement="false"
+            useTablePersonalisation="true"
+            showRowCount="true"
+            enableAutoBinding="true"
+            persistencyKey="SmartTableAnalytical_Explored"
+            demandPopin="false"
+            ignoredFields="GJAHR,BLART,KUNNR"
+            requestAtLeastFields="ZUONR,GJAHR,BLART,KUNNR,BELNR"
+            initiallyVisibleFields="SGTXT,BUDAT,ZFBDT,WAERS,DMBE3,WRBTR">
+					  	<smartTable:layoutData>
+								<FlexItemData xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
+								</smartTable:layoutData>
+                <Table growingThreshold="99999999" growing="true" sticky="ColumnHeaders,HeaderToolbar">
+                <columns>
+                         <Column width="75px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "BELNR", "leadingProperty": "BELNR", "sortProperty": "BELNR", "filterProperty": "BELNR" , "columnIndex": 0}'/>
+                          </customData>
+                          <Label text="Doc" tooltip="Documento Pagare"/>
+                        </Column>
+                        <Column hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "SGTXT", "leadingProperty": "SGTXT", "sortProperty": "SGTXT", "filterProperty": "SGTXT" , "columnIndex": 1}'/>
+                          </customData>
+                          <Label text="{/#det_linacordada/SGTXT/@sap:label}" tooltip="Fecha"/>
+                        </Column>
+                        <Column hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "BUDAT", "leadingProperty": "BUDAT", "sortProperty": "BUDAT", "filterProperty": "BUDAT" , "columnIndex": 2}'/>
+                          </customData>
+                          <Label text="{/#det_linacordada/BUDAT/@sap:label}" tooltip="Fecha"/>
+                        </Column>
+                         <Column hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "ZFBDT", "leadingProperty": "ZFBDT", "sortProperty": "ZFBDT", "filterProperty": "ZFBDT" , "columnIndex": 3}'/>
+                          </customData>
+                          <Label text="{/#det_linacordada/ZFBDT/@sap:label}" tooltip="Fecha de Vencimiento"/>
+                        </Column>
+                        <Column hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "WAERS", "leadingProperty": "WAERS", "sortProperty": "WAERS", "filterProperty": "WAERS" , "columnIndex": 4}'/>
+                          </customData>
+                          <Label text="{/#det_linacordada/WAERS/@sap:label}" tooltip="Fecha"/>
+                        </Column>
+                        <Column hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "DMBE3", "leadingProperty": "DMBE3", "sortProperty": "DMBE3", "filterProperty": "DMBE3" , "columnIndex": 5}'/>
+                          </customData>
+                          <Label text="{/#det_linacordada/DMBE3/@sap:label}" tooltip="Fecha"/>
+                        </Column>
+                        <Column hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "WRBTR", "leadingProperty": "WRBTR", "sortProperty": "WRBTR", "filterProperty": "WRBTR" , "columnIndex": 6}'/>
+                          </customData>
+                          <Label text="{/#det_linacordada/WRBTR/@sap:label}" tooltip="Fecha"/>
+                        </Column>
+                </columns>
+                 <items>
+                        <ColumnListItem>
+                        <cells>
+                          <ObjectStatus icon="sap-icon://pdf-attachment" active="true" press="onPdfDocumento"/>
+                          <ObjectAttribute text="{SGTXT}"/>
+                          <ObjectAttribute text="{path:'BUDAT', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{path:'ZFBDT', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{WAERS}"/>
+                          <ObjectAttribute text="{path: 'DMBE3', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <ObjectAttribute text="{path: 'WRBTR', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <!-- <ObjectStatus icon="sap-icon://pdf-attachment" text="{BELNR}" active="true" press="onPdfDocumento"/> -->
+                        </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+							</smartTable:SmartTable>
+						</ScrollContainer>
+					</semantic:content>
+				</semantic:FullscreenPage>
+			</App>
+	</mvc:View>

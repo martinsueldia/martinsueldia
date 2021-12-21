@@ -1,0 +1,204 @@
+<mvc:View controllerName="profertil.appCtaCorriente.controller.FacturadaPagada"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:st="sap.ui.comp.smarttable"
+    xmlns:fb="sap.ui.comp.smartfilterbar">
+
+    <App>
+        <semantic:SemanticPage id="idPageFacturadaPagada" headerExpanded="true" headerPinnable="true" toggleHeaderOnTitleClick="true" preserveHeaderStateOnScroll="false" titleAreaShrinkRatio="1:1.6:1.6" showFooter="false">
+
+            <semantic:titleHeading>
+                <Title id="headerTitle" text="{i18n>facturadaPagada_title}" textAlign="Center" class="sapUiTinyMargin"/>
+            </semantic:titleHeading>
+            <semantic:titleExpandedContent>
+
+                <VBox id="expContent" class="sapUiResponsiveContentPadding" objectBindings="{MercaderiaPendiente>/ClienteSet('1')}">
+                    <items>
+                        <ObjectHeader id="_IDGenObjectHeader1" icon= "sap-icon://customer" iconDensityAware="false" imageShape="Circle" responsive="true" fullScreenOptimized="true" title="{MercaderiaPendiente>Nombre}" intro="{MercaderiaPendiente>Kunnr}" class="sapUiResponsivePadding--header">
+                        </ObjectHeader>
+                    </items>
+                </VBox>
+            </semantic:titleExpandedContent>
+            <semantic:headerContent>
+            </semantic:headerContent>
+            <semantic:content>
+
+
+                <st:SmartTable
+                persistencyKey="mercaderia_SmartTable"
+                width="100%"
+                entitySet="MercaderiaFacturadaCompensadaSet"
+                tableBindingPath="MercaderiaPendiente>/MercaderiaFacturadaCompensadaSet"
+                direction="Column"
+                showRowCount="true"
+                fitContainer="true"
+                tableType="ResponsiveTable"
+                header="{i18n>tabla_detalle_titulo}"
+                enableAutoBinding="true"
+                id="idSmartTable"
+                smartFilterId="idSmartFilterBar"
+                demandPopin="true"
+                showFullScreenButton="true"
+                beforeExport="onBeforeExport"
+                beforeRebindTable="onBeforeRebindTable"
+                useVariantManagement="true"
+                showVariantManagement="true"
+                justifyContent="Center"
+                class="sapUiResponsiveContentPadding"
+                alignContent="Center"
+                initiallyVisibleFields="Vbeln,Matnr,Arktx,KondmTxt,Netpr,Werks,WerksName1,Gueen,TotAcuerdo,NoEntreFacComp,NoEntreFacCompIva">
+
+                    <Table alternateRowColors="true" mode="None" growing="true" growingThreshold="999999999" sticky="ColumnHeaders,HeaderToolbar">
+                        <columns>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Vbeln", "isCurrency": false, "leadingProperty": "Vbeln", "sortProperty": "Vbeln", "filterProperty": "Vbeln" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Vbeln/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Vbeln/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Matnr", "isCurrency": false, "leadingProperty": "Matnr", "sortProperty": "Matnr", "filterProperty": "Matnr" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Matnr/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Matnr/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Arktx", "isCurrency": false, "leadingProperty": "Arktx", "sortProperty": "Arktx", "filterProperty": "Arktx" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Arktx/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Arktx/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "KondmTxt", "isCurrency": false, "leadingProperty": "KondmTxt", "sortProperty": "KondmTxt", "filterProperty": "KondmTxt" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/KondmTxt/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/KondmTxt/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Netpr", "isCurrency": false, "leadingProperty": "Netpr", "sortProperty": "Netpr", "filterProperty": "Netpr", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Netpr/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Netpr/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center" width="5%">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Werks", "isCurrency": false, "leadingProperty": "Werks", "sortProperty": "Werks", "filterProperty": "Werks" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Werks/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Werks/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "WerksName1", "isCurrency": false, "leadingProperty": "WerksName1", "sortProperty": "WerksName1", "filterProperty": "WerksName1" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/WerksName1/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/WerksName1/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Gueen", "isCurrency": false, "leadingProperty": "Gueen", "sortProperty": "Gueen", "filterProperty": "Gueen", "type": "date" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Gueen/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Gueen/@sap:label}"/>
+                            </Column>
+
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "TotAcuerdo", "isCurrency": false, "leadingProperty": "TotAcuerdo", "sortProperty": "TotAcuerdo", "filterProperty": "TotAcuerdo", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotAcuerdo/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotAcuerdo/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "TotAcuerdoIva", "isCurrency": false, "leadingProperty": "TotAcuerdoIva", "sortProperty": "TotAcuerdoIva", "filterProperty": "TotAcuerdoIva", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotAcuerdoIva/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotAcuerdoIva/@sap:label}"/>
+                            </Column>
+
+
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "TotPlanEntrega", "isCurrency": false, "leadingProperty": "TotPlanEntrega", "sortProperty": "TotPlanEntrega", "filterProperty": "TotPlanEntrega", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotPlanEntrega/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotPlanEntrega/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "TotPlanEntregaIva", "isCurrency": false, "leadingProperty": "TotPlanEntregaIva", "sortProperty": "TotPlanEntregaIva", "filterProperty": "TotPlanEntregaIva", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotPlanEntregaIva/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/TotPlanEntregaIva/@sap:label}"/>
+                            </Column>
+
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "Entregado", "isCurrency": false, "leadingProperty": "Entregado", "sortProperty": "Entregado", "filterProperty": "Entregado", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Entregado/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/Entregado/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "EntregadoIva", "isCurrency": false, "leadingProperty": "EntregadoIva", "sortProperty": "EntregadoIva", "filterProperty": "EntregadoIva", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/EntregadoIva/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/EntregadoIva/@sap:label}"/>
+                            </Column>
+
+
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "PendienteAcuerdo", "isCurrency": false, "leadingProperty": "PendienteAcuerdo", "sortProperty": "PendienteAcuerdo", "filterProperty": "PendienteAcuerdo", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/PendienteAcuerdo/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/PendienteAcuerdo/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center" visible="false">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "PendienteAcuerdoIva", "isCurrency": false, "leadingProperty": "PendienteAcuerdoIva", "sortProperty": "PendienteAcuerdoIva", "filterProperty": "PendienteAcuerdoIva", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/PendienteAcuerdoIva/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/PendienteAcuerdoIva/@sap:label}"/>
+                            </Column>
+
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "NoEntreFacComp", "isCurrency": false, "leadingProperty": "NoEntreFacComp", "sortProperty": "NoEntreFacComp", "filterProperty": "NoEntreFacComp", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/NoEntreFacComp/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/NoEntreFacComp/@sap:label}"/>
+                            </Column>
+                            <Column hAlign="Center">
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "NoEntreFacCompIva", "isCurrency": false, "leadingProperty": "NoEntreFacCompIva", "sortProperty": "NoEntreFacCompIva", "filterProperty": "NoEntreFacCompIva", "type": "numeric" }' />
+                                </customData>
+                                <Label text="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/NoEntreFacCompIva/@sap:label}" tooltip="{MercaderiaPendiente>/#MercaderiaFacturadaCompensada/NoEntreFacCompIva/@sap:label}"/>
+                            </Column>
+
+                        </columns>
+                        <items>
+                            <ColumnListItem type="Inactive" highlight="{ path: 'MercaderiaPendiente>Gueen', formatter: '.formatter.colorHighlight' }">
+                                <cells>
+                                    <ObjectIdentifier title="{MercaderiaPendiente>Vbeln}"/>
+                                    <Text text="{MercaderiaPendiente>Matnr}"/>
+                                    <Text text="{MercaderiaPendiente>Arktx}"/>
+                                    <Text text="{MercaderiaPendiente>KondmTxt}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>Netpr', formatter: '.formatter.usd'}"/>
+                                    <Text text="{MercaderiaPendiente>Werks}"/>
+                                    <Text text="{MercaderiaPendiente>WerksName1}"/>
+                                    <ObjectStatus text="{= ${MercaderiaPendiente>Gueen}.toLocaleDateString() }" state="{ path: 'MercaderiaPendiente>Gueen', formatter: '.formatter.colorFechaVencimiento' }" />
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>TotAcuerdo', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>TotAcuerdoIva', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>TotPlanEntrega', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>TotPlanEntregaIva', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>Entregado', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>EntregadoIva', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>PendienteAcuerdo', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>PendienteAcuerdoIva', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>NoEntreFacComp', formatter: '.formatter.usd'}"/>
+                                    <ObjectNumber number="{path: 'MercaderiaPendiente>NoEntreFacCompIva', formatter: '.formatter.usd'}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+
+                </st:SmartTable>
+
+
+            </semantic:content>
+        </semantic:SemanticPage>
+    </App>
+</mvc:View>

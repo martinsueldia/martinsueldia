@@ -1,0 +1,166 @@
+<mvc:View controllerName="profertil.appCtaCorriente.controller.DetalleMercaderia"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:layout="sap.ui.layout"
+    xmlns:semantic="sap.f.semantic">
+    <App id="app">
+        <semantic:SemanticPage id="mySemanticPage" headerExpanded="true" headerPinnable="true" toggleHeaderOnTitleClick="true" preserveHeaderStateOnScroll="false" titleAreaShrinkRatio="1:1.6:1.6" showFooter="false">
+
+            <semantic:titleHeading>
+                <Title id="headerTitle" text="Mercadería pendiente de retiro" textAlign="Center" class="sapUiTinyMargin"/>
+            </semantic:titleHeading>
+            <semantic:titleExpandedContent>
+
+                <VBox id="expContent" models="" class="sapUiResponsiveContentPadding" objectBindings="{MercaderiaPendiente>/ClienteSet('1')}">
+                    <items>
+                        <ObjectHeader id="_IDGenObjectHeader1" icon= "sap-icon://customer" iconDensityAware="false" imageShape="Circle" responsive="true" fullScreenOptimized="true" title="{MercaderiaPendiente>Nombre}" intro="{MercaderiaPendiente>Kunnr}" class="sapUiResponsivePadding--header">
+                        </ObjectHeader>
+                    </items>
+                </VBox>
+            </semantic:titleExpandedContent>
+            <semantic:headerContent>
+            </semantic:headerContent>
+            <!-- Content -->
+            <semantic:content>
+                <ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
+                    <l:Grid >
+                        <l:content>
+                            <VBox height="100%" alignItems="Baseline">
+                                <Panel id="_IDGenPanel1" expandable="true" width="100em" headerText="{i18n>facturadaPagada_title}" class="sapUiResponsiveMargin myPanel">
+                                    <content>
+                                        <Table inset="false" width="70%">
+                                            <columns>
+                                                <Column minScreenWidth="" demandPopin="true">
+                                                    <Text text="{i18n>resumen_col_descripcion}"/>
+                                                </Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                    <Text text="{i18n>resumen_col_tn}"/>
+                                                </Column>
+
+                                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                    <Text text="{i18n>resumen_col_usd}"/>
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_vencido}"/>
+                                                        <Text text="{path: 'totales>/FacturadaPagada/Vencido/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/FacturadaPagada/Vencido/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_no_vencido}"/>
+                                                        <Text text="{path: 'totales>/FacturadaPagada/NoVencido/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/FacturadaPagada/NoVencido/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_total}"/>
+                                                        <Text text="{path: 'totales>/FacturadaPagada/Total/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/FacturadaPagada/Total/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                        <Button type="Default" text="{i18n>boton_detalle_texto}" press="navToFacturadaPagada" ariaDescribedBy="acceptButtonDescription genericButtonDescription"/>
+                                    </content>
+                                </Panel>
+                                <Panel id="_IDGenPanel2" expandable="true" width="100em" headerText="{i18n>facturadaNoPagada_title}" class="sapUiResponsiveMargin myPanel">
+                                    <content>
+                                        <Table inset="false" width="70%">
+                                            <columns>
+                                                <Column minScreenWidth="" demandPopin="true">
+                                                    <Text text="{i18n>resumen_col_descripcion}"/>
+                                                </Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                    <Text text="{i18n>resumen_col_tn}"/>
+                                                </Column>
+
+                                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                    <Text text="{i18n>resumen_col_usd}"/>
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_vencido}"/>
+                                                        <Text text="{path: 'totales>/FacturadaNoPagada/Vencido/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/FacturadaNoPagada/Vencido/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_no_vencido}"/>
+                                                        <Text text="{path: 'totales>/FacturadaNoPagada/NoVencido/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/FacturadaNoPagada/NoVencido/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_total}"/>
+                                                        <Text text="{path: 'totales>/FacturadaNoPagada/Total/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/FacturadaNoPagada/Total/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                        <Button type="Default" text="{i18n>boton_detalle_texto}" press="navToFacturadaNoPagada" ariaDescribedBy="acceptButtonDescription genericButtonDescription"/>
+                                    </content>
+                                </Panel>
+                                <Panel id="_IDGenPanel3" expandable="true" width="100em" headerText="{i18n>noFacturadaNoPagada_title}" class="sapUiResponsiveMargin myPanel">
+                                    <content>
+                                        <Table inset="false" width="70%">
+                                            <columns>
+                                                <Column minScreenWidth="" demandPopin="true">
+                                                    <Text text="{i18n>resumen_col_descripcion}"/>
+                                                </Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                    <Text text="{i18n>resumen_col_tn}"/>
+                                                </Column>
+
+                                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                    <Text text="{i18n>resumen_col_usd}"/>
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_vencido}"/>
+                                                        <Text text="{path: 'totales>/NoFacturadaNoPagada/Vencido/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/NoFacturadaNoPagada/Vencido/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_no_vencido}"/>
+                                                        <Text text="{path: 'totales>/NoFacturadaNoPagada/NoVencido/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/NoFacturadaNoPagada/NoVencido/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{i18n>resumen_col_total}"/>
+                                                        <Text text="{path: 'totales>/NoFacturadaNoPagada/Total/Tn', formatter: '.formatter.usd'}"/>
+                                                        <Text text="{path: 'totales>/NoFacturadaNoPagada/Total/Usd', formatter: '.formatter.usd'}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                        <Button type="Default" text="{i18n>boton_detalle_texto}" press="navToNoFacturadaNoPagada" ariaDescribedBy="acceptButtonDescription genericButtonDescription"/>
+                                    </content>
+                                </Panel>
+                            </VBox>
+                        </l:content>
+                    </l:Grid>
+                </ScrollContainer>
+            </semantic:content>
+        </semantic:SemanticPage>
+    </App>
+</mvc:View>

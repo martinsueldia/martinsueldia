@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core">
+  <Dialog id="dialogRecibos" title="Detalle de Posiciones" contentWidth="90%">
+    <l:Grid defaultSpan="L12 M12 S12" width="auto">
+      <l:content>
+						<smartTable:SmartTable id="detalleRecibos" width="100%"
+                        entitySet="detalleReciboSet"
+                        tableType="ResponsiveTable"
+                        useExportToExcel="true"
+                        editable="false"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="false"
+                        useTablePersonalisation="true"
+                        showRowCount="true"
+                        demandPopin="true"
+                        beforeRebindTable="beforeDetalle"
+                        enableAutoBinding="true"
+                        ignoreFromPersonalisation="BELNR,GJAHR"
+                        requestAtLeastFields="AUGDT,SGTXT,ZUONR,DMBTR,HKONT,BELNR,GJAHR"
+                        initiallyVisibleFields="AUGDT,SGTXT,ZUONR,DMBTR,HKONT">
+							<smartTable:layoutData>
+								<FlexItemData
+									xmlns="sap.m" id="FlexItemData1" growFactor="1" baseSize="0%"/>
+								</smartTable:layoutData>
+                    <Table>
+                        <columns>
+                        <Column id="_IDGenColumn1">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "AUGDT", "leadingProperty": "AUGDT", "sortProperty": "AUGDT", "columnIndex":"0", "type": "date"}'/>
+                        </customData>
+                        <Text id="_IDGenText2" text="Fe. Valor"/>
+                       </Column>
+                       </columns>
+                        <items>
+                        <ColumnListItem>
+                        <cells>
+                          <Text id="_IDGenText1" text ="{path:'AUGDT', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          </cells>
+                        </ColumnListItem>
+                        </items>
+                        </Table>
+							</smartTable:SmartTable>
+      </l:content>
+    </l:Grid>
+  <buttons>
+    <Button text="Cerrar" press="onCancelarRecibos" type="Default"/>
+  </buttons>
+  </Dialog>
+</core:FragmentDefinition>
