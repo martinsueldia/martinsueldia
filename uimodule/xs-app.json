@@ -7,10 +7,16 @@
       "source": "^/sap/opu/odata/sap/ZSV_CTA_CORRIENTE_SRV/",
       "destination": "BACKEND_SAP"
     },
-{
+    {
       "authenticationType": "none",
       "csrfProtection": false,
       "source": "^/sap/opu/odata/sap/ZSV_RELATED_DOCS_SRV/",
+      "destination": "BACKEND_SAP"
+    },
+    {
+      "authenticationType": "none",
+      "csrfProtection": false,
+      "source": "^/sap/opu/odata/sap/ZSV_MERCADERIA_SRV/",
       "destination": "BACKEND_SAP"
     },
     {
@@ -21,3 +27,4 @@
     }
   ]
 }
+

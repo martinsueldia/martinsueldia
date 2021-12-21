@@ -1,63 +1,159 @@
-<mvc:View controllerName="profertil.appCtaCorriente.controller.DetalleCheques"
-    id="view1"
-	  height="100%"
-    xmlns:smartTable="sap.ui.comp.smarttable"
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-		xmlns:core="sap.ui.core"
-		xmlns:mvc="sap.ui.core.mvc"
-		xmlns="sap.m"
-		xmlns:semantic="sap.m.semantic"
-		xmlns:ui="sap.ca.ui"
-		displayBlock="true">
-   <Shell id="shell">
+<mvc:View xmlns:smartTable="sap.ui.comp.smarttable" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:ui="sap.ca.ui" controllerName="profertil.appCtaCorriente.controller.DetalleCheques" id="view1" height="100%" displayBlock="true">
 		<App id="App">
-		<semantic:FullscreenPage  title="{i18n>detChePago}"
-                               showNavButton="true" navButtonPress="onNavBack">
+		<semantic:FullscreenPage title="{i18n>detChePago}" showNavButton="true" navButtonPress="onNavBack">
 				<semantic:content>
-					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
-			      <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="det_chequeSet" basicSearchFieldName="Item,Blart" enableBasicSearch="true" >
+					<Bar id="bar0">
+					    <contentRight>
+					        <Button id="btnCliente" text="Cliente : {ModelEstadoGral>/ModelEstadoGral/Kunnr} - {ModelEstadoGral>/ModelEstadoGral/KunnrName1}" type="Transparent"/>
+					    </contentRight>
+					</Bar>
+					<ScrollContainer id="containerForm" width="100%" horizontal="true" vertical="false">
+			      <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="det_chequeSet" basicSearchFieldName="Item,Blart" enableBasicSearch="true" visible="false">
 							<smartFilterBar:controlConfiguration>
-                <smartFilterBar:ControlConfiguration id="multiCombo"  visibleInAdvancedArea="true">
+                <smartFilterBar:ControlConfiguration id="multiCombo" visibleInAdvancedArea="true">
                 </smartFilterBar:ControlConfiguration>
-                <smartFilterBar:ControlConfiguration id="Report" key="Report" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <smartFilterBar:ControlConfiguration id="FechMov" key="FechMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <!--<smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>-->
-                 <smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration3"  key="FechaSaldo" label="Saldo Cuenta Corriente" visibleInAdvancedArea="true">
+                <smartFilterBar:ControlConfiguration id="Report" key="Report" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"/>
+                <smartFilterBar:ControlConfiguration id="FechMov" key="FechMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"/>
+                 <smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration3" key="FechaSaldo" label="Saldo Cuenta Corriente" visibleInAdvancedArea="true">
                  <smartFilterBar:customControl>
-                  <!--<Label id="_IDGenLabel1" text="simple DatePicker" labelFor="DP1"/>-->
-                      <DatePicker
-                        id="DP1"
-                        placeholder="Ingresar Fecha"
-                        change="onChangeFechaSaldoCheques"
-                        class="sapUiSmallMarginBottom"/>
+                      <DatePicker id="DP1" placeholder="Ingresar Fecha" change="onChangeFechaSaldoCheques" class="sapUiSmallMarginBottom"/>
                 </smartFilterBar:customControl>
                   </smartFilterBar:ControlConfiguration></smartFilterBar:controlConfiguration>
-							<!-- layout data used to make the table growing but the filter bar fixed -->
 							<smartFilterBar:layoutData>
 								<FlexItemData shrinkFactor="0"/>
 							</smartFilterBar:layoutData>
 						</smartFilterBar:SmartFilterBar>
-            <smartTable:SmartTable id="chequeTabla" width="100%"
-                        entitySet="det_chequeSet" smartFilterId="smartFilterBar"
-                        tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport"  beforeRebindTable="onBeforeRebindTable" header="{i18n>totalRegis}"
-                        useVariantManagement="false" useTablePersonalisation="true"
-                        showRowCount="true"
-                        enableAutoBinding="true"
-                        persistencyKey="SmartTableAnalytical_Explored"
-                        demandPopin="true"
-                        ignoredFields="Kunnr,Gjahr,Belnr,Buzei"
-                        requestAtLeastFields="Item,Blart,BlartTxt,Zuonr,Bldat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe"
-                        initiallyVisibleFields="Item,Blart,BlartTxt,Zuonr,Bldat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe">
+            <smartTable:SmartTable id="chequeTabla"
+            width="100%"
+            entitySet="det_chequeSet"
+            smartFilterId="smartFilterBar"
+            tableType="ResponsiveTable"
+            useExportToExcel="true"
+            editable="false"
+            beforeExport="onBeforeExport"
+            beforeRebindTable="onBeforeRebindTable"
+            header="{i18n>totalRegis}"
+            useVariantManagement="false"
+            useTablePersonalisation="true"
+            showRowCount="true"
+            enableAutoBinding="true"
+            persistencyKey="SmartTableAnalytical_Explored"
+            demandPopin="false"
+            ignoredFields="Kunnr,Gjahr,Belnr,Buzei,Item,Total"
+            requestAtLeastFields="Item,Blart,BlartTxt,Zuonr,Bldat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe"
+            initiallyVisibleFields="BlartTxt,Zuonr,Banco,Bldat,Zfbdt,Dmbtr,SaldoAcumMl,TipoCambio,Dmbe3,SaldoAcumMe">
 					  	<smartTable:layoutData>
-								<FlexItemData
-									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
+								<FlexItemData xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
-                <Table growingThreshold="99999999" growing="true"/>
+                <Table growingThreshold="99999999" growing="true" sticky="ColumnHeaders,HeaderToolbar">
+                    <columns>
+                        <Column width="100px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "BlartTxt", "leadingProperty": "BlartTxt", "sortProperty": "BlartTxt", "filterProperty": "BlartTxt" , "columnIndex": 0}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/BlartTxt/@sap:label}" tooltip="Concepto"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Zuonr", "leadingProperty": "Zuonr", "sortProperty": "Zuonr", "filterProperty": "Zuonr" , "columnIndex": 1}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/Zuonr/@sap:label}" tooltip="Comprobante"/>
+                        </Column>
+                       <Column width="75px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Banco", "leadingProperty": "Banco", "sortProperty": "Banco", "filterProperty": "Banco" , "columnIndex": 2}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/Banco/@sap:label}" tooltip="Banco"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Bldat", "leadingProperty": "Bldat", "sortProperty": "Bldat", "filterProperty": "Bldat" , "columnIndex": 3, "type": "date"}'/>
+                        </customData>
+                        <Text  text="{/#det_cheque/Bldat/@sap:label}" tooltip="Fecha de Documento"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Zfbdt", "leadingProperty": "Zfbdt", "sortProperty": "Zfbdt", "filterProperty": "Zfbdt" , "columnIndex": 4, "type": "date"}'/>
+                        </customData>
+                        <Text  text="{/#det_cheque/Zfbdt/@sap:label}" tooltip="Fecha de Vencimiento"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Dmbtr", "leadingProperty": "Dmbtr", "sortProperty": "Dmbtr", "filterProperty": "Dmbtr" , "columnIndex": 5, "type": "numeric"}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/Dmbtr/@sap:label}" tooltip="Importe $"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "SaldoAcumMl", "leadingProperty": "SaldoAcumMl", "sortProperty": "SaldoAcumMl", "filterProperty": "SaldoAcumMl" , "columnIndex": 6, "type": "numeric"}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/SaldoAcumMl/@sap:label}" tooltip="Saldo Acumulado"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "TipoCambio", "leadingProperty": "TipoCambio", "sortProperty": "TipoCambio", "filterProperty": "TipoCambio" , "columnIndex": 7, "type": "numeric"}'/>
+                        </customData>
+                        <Text  text="{/#det_cheque/TipoCambio/@sap:label}" tooltip="Tipo de Cambio"/>
+                        </Column>
+
+
+
+
+
+                        <Column width="100px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Dmbe3", "leadingProperty": "Dmbe3", "sortProperty": "Dmbe3", "filterProperty": "Dmbe3" , "columnIndex": 8, "type": "numeric"}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/Dmbe3/@sap:label}" tooltip="Importe en USD"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "SaldoAcumMe", "leadingProperty": "SaldoAcumMe", "sortProperty": "SaldoAcumMe", "filterProperty": "SaldoAcumMe" , "columnIndex": 9, "type": "numeric"}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/SaldoAcumMe/@sap:label}" tooltip="Saldo Acumulado USD"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "FechMov", "leadingProperty": "FechMov", "sortProperty": "FechMov", "filterProperty": "FechMov" , "columnIndex": 10, "type": "date"}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/FechMov/@sap:label}" tooltip="Fecha Movimiento"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "FechaSaldo", "leadingProperty": "FechaSaldo", "sortProperty": "FechaSaldo", "filterProperty": "FechaSaldo" , "columnIndex": 11, "type": "date"}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/FechaSaldo/@sap:label}" tooltip="Fecha Saldo Cuenta Corriente"/>
+                        </Column>
+                        <Column width="75px" hAlign="Center" visible="false">
+                          <customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey": "Blart", "leadingProperty": "Blart", "sortProperty": "Blart", "filterProperty": "Blart" , "columnIndex": 12}'/>
+                          </customData>
+                          <Label text="{/#det_cheque/Blart/@sap:label}" tooltip="Tipo de Documento"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <cells>
+                          <ObjectAttribute text="{BlartTxt}"/>
+                          <ObjectAttribute text="{Zuonr}"/>
+                          <ObjectAttribute text="{Banco}"/>
+                          <ObjectAttribute text="{path:'Bldat', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{path:'Zfbdt', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{ path: 'Dmbtr', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" />
+                          <ObjectAttribute text="{ path: 'SaldoAcumMl', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <ObjectAttribute text="{path: 'TipoCambio', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 4}}"/>
+                          <ObjectAttribute text="{ path: 'Dmbe3', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" />
+                          <ObjectAttribute text="{ path: 'SaldoAcumMe', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" />
+                          <ObjectAttribute text="{path:'FechMov', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{path:'FechaSaldo', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{Blart}" />
+                        </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
 							</smartTable:SmartTable>
 						</ScrollContainer>
 					</semantic:content>
 				</semantic:FullscreenPage>
 			</App>
-		</Shell>
 	</mvc:View>

@@ -23,7 +23,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/ASaldoCc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/ASaldoCc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
@@ -32,7 +32,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactVencidas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactVencidas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
@@ -41,7 +41,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAntVencidas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAntVencidas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
@@ -50,7 +50,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/Pagos', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/Pagos', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem >
@@ -59,7 +59,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem >
@@ -68,7 +68,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAntAVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/FactAntAVencer', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

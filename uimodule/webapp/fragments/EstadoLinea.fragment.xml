@@ -21,11 +21,11 @@
 		<items>
 			<ColumnListItem>
 				<cells>
-					<Text text="{i18n>lineaCrAco}"/>
+					<ObjectStatus text="{i18n>lineaCrAco}" active="true" state="Information" press="onPressLineaAcre"/>
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/LineaAcordada', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/LineaAcordada', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos" />
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
@@ -34,7 +34,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{ path: 'ModelEstadoGral>/ModelEstadoGral/LineaAfectada', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{ path: 'ModelEstadoGral>/ModelEstadoGral/LineaAfectada', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -1,88 +1,219 @@
-<mvc:View
-	  controllerName="profertil.appCtaCorriente.controller.DetalleCanje"
-    id="viewCanje"
-	  height="100%"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:core="sap.ui.core"
-  xmlns:table="sap.ui.table"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:semantic="sap.m.semantic"
-		displayBlock="true">
-	<Shell id="shell">
-		<App id="App">
-			<semantic:FullscreenPage title="{i18n>detalleCereal}"
-                               showNavButton="true" navButtonPress="onNavBack">
+<mvc:View xmlns:smartTable="sap.ui.comp.smarttable" xmlns:smartVariantManagement="sap.ui.comp.smartvariants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic" controllerName="profertil.appCtaCorriente.controller.DetalleCanje" id="viewCanje" height="100%" displayBlock="true">
+
+    <App id="App">
+			<semantic:FullscreenPage id="FullScreenCanje" title="{i18n>detalleCereal}" showNavButton="true" navButtonPress="onNavBack">
+
 				<semantic:content>
-					<ScrollContainer id="containerForm" width="100%" horizontal="false" vertical="false">
-						<smartFilterBar:SmartFilterBar id="smartFilterBarCanje" entitySet="det_cerealSet" >
-							<smartFilterBar:controlConfiguration>
-                <smartFilterBar:ControlConfiguration id="FechaMov" key="FechaMov" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <!--<smartFilterBar:ControlConfiguration id="FechaSaldo" key="FechaSaldo" conditionType="sap.ui.comp.config.condition.DateRangeType" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>-->
-                <smartFilterBar:ControlConfiguration id="_IDGenControlConfiguration2"  key="FechaSaldo" label="Saldo Cuenta Corriente a" visibleInAdvancedArea="true">
-     	          <smartFilterBar:customControl>
-                  <!--<Label id="_IDGenLabel1" text="simple DatePicker" labelFor="DP1"/>-->
-                      <DatePicker
-                        id="DP1"
-                        placeholder="Ingresar Fecha"
-                        change="onChangeFechaSaldoCereal"
-                        class="sapUiSmallMarginBottom"/>
-                </smartFilterBar:customControl>
-                  </smartFilterBar:ControlConfiguration>
-                  </smartFilterBar:controlConfiguration>
-							<!-- layout data used to make the table growing but the filter bar fixed -->
-							<smartFilterBar:layoutData>
-								<FlexItemData shrinkFactor="0"/>
-							</smartFilterBar:layoutData>
-						</smartFilterBar:SmartFilterBar>
-						<smartTable:SmartTable id="detalleCanje" width="100%"
-                        entitySet="det_cerealSet" smartFilterId="smartFilterBarCanje"
-                        tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable"  header="{i18n>totalRegis}"
-                        useVariantManagement="false" useTablePersonalisation="true"
-                        showRowCount="true"
-                        demandPopin="true"
-                        enableAutoBinding="true"
-                        ignoredFields="Kunnr,FechaMov,FechaSaldo"
-                        requestAtLeastFields="Contrato,NroComprobante,Fecha,DescEspecie,Corredor,Desde,Hasta,Modalidad,UsdEntrPendFijar,UsdEntrPendLiqui,UsdLiqNoEntregadas,UsdPend"
-                        initiallyVisibleFields="Contrato,NroComprobante,Fecha,DescEspecie,Corredor,Desde,Hasta,Modalidad,UsdEntrPendFijar,UsdEntrPendLiqui,UsdLiqNoEntregadas,UsdPend">
+            <ScrollContainer id="containerForm" width="100%" horizontal="true" vertical="false">
+					<Bar id="bar0">
+					    <contentRight>
+					        <Button id="btnCliente" text="Cliente : {ModelEstadoGral>/ModelEstadoGral/Kunnr} - {ModelEstadoGral>/ModelEstadoGral/KunnrName1}" type="Transparent"/>
+					    </contentRight>
+					</Bar>
+          <!-- <HBox class="exPageVariantPadding">
+            <smartVariantManagement:SmartVariantManagement
+                  id="pageVariantId"
+                  persistencyKey="PageVariantPKey" />
+          </HBox> -->
+
+						<smartTable:SmartTable
+              id="detalleCanje"
+              width="100%"
+              entitySet="det_cerealSet"
+              smartFilterId="smartFilterBarCanje"
+              tableType="ResponsiveTable"
+              useExportToExcel="true"
+              editable="false"
+              beforeExport="onBeforeExport"
+              beforeRebindTable="onBeforeRebindTable"
+              header="{i18n>totalRegis}"
+              persistencyKey="SmartTableAnalytical_Explored"
+              useVariantManagement="true"
+              showVariantManagement="false"
+              currentVariantId="USD"
+              useTablePersonalisation="true"
+              showRowCount="true"
+              demandPopin="false"
+              enableAutoBinding="true"
+              ignoredFields="Kunnr,FechaMov,FechaSaldo,UsdTotal"
+              requestAtLeastFields="Contrato,NroComprobante,Fecha,DescEspecie,Corredor,Desde,Hasta,Modalidad,UsdEntrPendFijar,UsdEntrPendLiqui,UsdLiqNoEntregadas,UsdPend,ClaseDoc,UsdTotal"
+              initiallyVisibleFields="Contrato,NroComprobante,ClaseDoc,Fecha,DescEspecie,Corredor,Desde,Hasta,Modalidad,UsdEntrPendFijar,UsdEntrPendLiqui,UsdLiqNoEntregadas,UsdPend,TnEntrLiquidadas,TnEntrPendFijar,TnEntrPendLiqui,TnEntregadas,TnLiqNoEntregadas,TnPteEnt,TnPactadas">
 							<smartTable:layoutData>
-								<FlexItemData
-									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
+								<FlexItemData xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
-                <Table growingThreshold="99999999" growing="true">
+                      <smartTable:customToolbar>
+                      <OverflowToolbar xmlns="sap.m" design="Transparent">
+                      <ToolbarSpacer/>
+                      <SegmentedButton id="SB1" selectionChange="onSelectionChange" selectedKey="USDTN" >
+                        <items>
+                          <SegmentedButtonItem text="USD" key="USD" />
+                          <SegmentedButtonItem text="TN" key="TN" />
+                        </items>
+                        </SegmentedButton>
+                      </OverflowToolbar>
+                      </smartTable:customToolbar>
+                <Table id="detalleCanjeTabla" popinLayout="GridLarge" growingThreshold="99999999" growing="true" updateFinished="onUpdateFinished" updateStarted="onUpdateStart" fixedLayout="true" sticky="ColumnHeaders,HeaderToolbar">
                         <columns>
-                        <Column width="50px" hAlign="Begin">
+                        <Column width="100px" hAlign="Center">
                         <customData>
-                        <core:CustomData key="p13nData"
-                        value='\{"columnKey": "FechaSaldo", "leadingProperty": "FechaSaldo"}'/>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Contrato&quot;, &quot;leadingProperty&quot;: &quot;Contrato&quot;, &quot;sortProperty&quot;: &quot;Contrato&quot; , &quot;filterProperty&quot;: &quot;Contrato&quot;, &quot;columnIndex&quot;: 0}"/>
                         </customData>
-                        <Text   text="Doc"/>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/Contrato/@sap:label}" tooltip="Contrato"/>
                         </Column>
-                        <Column   width="100px" hAlign="Begin">
+                        <Column width="100px" hAlign="Center" visible="false">
                         <customData>
-                        <core:CustomData key="p13nData"
-                        value='\{"columnKey": "Contrato", "leadingProperty": "Contrato", "sortProperty": "Contrato" , "filterProperty": "Contrato" }'/>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;ClaseDoc&quot;, &quot;leadingProperty&quot;: &quot;ClaseDoc&quot;, &quot;sortProperty&quot;: &quot;claseDoc&quot; , &quot;filterProperty&quot;: &quot;ClaseDoc&quot;, &quot;columnIndex&quot;: 1}"/>
                         </customData>
-                        <Text   text="Contrato"/>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/ClaseDoc/@sap:label}" tooltip="Clase de Documento"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;NroComprobante&quot;, &quot;leadingProperty&quot;: &quot;NroComprobante&quot;, &quot;sortProperty&quot;: &quot;NroComprobante&quot; , &quot;filterProperty&quot;: &quot;NroComprobante&quot;, &quot;columnIndex&quot;: 2}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/NroComprobante/@sap:label}" tooltip="Numero Interno"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="true">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Fecha&quot;, &quot;leadingProperty&quot;: &quot;Fecha&quot;, &quot;sortProperty&quot;: &quot;Fecha&quot;, &quot;filterProperty&quot;: &quot;Fecha&quot; , &quot;columnIndex&quot;: 3, &quot;type&quot;: &quot;date&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/Fecha/@sap:label}" tooltip="Fecha"/>
+                        </Column>
+                        <Column width="150px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Corredor&quot;, &quot;leadingProperty&quot;: &quot;Corredor&quot;, &quot;sortProperty&quot;: &quot;Corredor&quot; , &quot;filterProperty&quot;: &quot;Corredor&quot;, &quot;columnIndex&quot;: 4}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/Corredor/@sap:label}" tooltip="Corredor"/>
+                        </Column>
+                        <Column width="60px" hAlign="Center" visible="true">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;DescEspecie&quot;, &quot;leadingProperty&quot;: &quot;DescEspecie&quot;, &quot;sortProperty&quot;: &quot;DescEspecie&quot; , &quot;filterProperty&quot;: &quot;DescEspecie&quot;, &quot;columnIndex&quot;: 5}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/DescEspecie/@sap:label}" tooltip="Descripcion de Especie"/>
+                        </Column>
+                        <Column width="150px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Modalidad&quot;, &quot;leadingProperty&quot;: &quot;Modalidad&quot;, &quot;sortProperty&quot;: &quot;Modalidad&quot; , &quot;filterProperty&quot;: &quot;Modalidad&quot;, &quot;columnIndex&quot;: 6}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/Modalidad/@sap:label}" tooltip="Modalidad"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Desde&quot;, &quot;leadingProperty&quot;: &quot;Desde&quot;, &quot;sortProperty&quot;: &quot;Desde&quot;, &quot;filterProperty&quot;: &quot;Desde&quot; , &quot;columnIndex&quot;: 7, &quot;type&quot;: &quot;date&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/Desde/@sap:label}" tooltip="Fecha Desde"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Hasta&quot;, &quot;leadingProperty&quot;: &quot;Hasta&quot;, &quot;sortProperty&quot;: &quot;Hasta&quot;, &quot;filterProperty&quot;: &quot;Hasta&quot; , &quot;columnIndex&quot;: 8, &quot;type&quot;: &quot;date&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/Hasta/@sap:label}" tooltip="Fecha Hasta"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="true">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;UsdEntrPendFijar&quot;, &quot;leadingProperty&quot;: &quot;UsdEntrPendFijar&quot;, &quot;sortProperty&quot;: &quot;UsdEntrPendFijar&quot;, &quot;filterProperty&quot;: &quot;UsdEntrPendFijar&quot; , &quot;columnIndex&quot;: 9, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/UsdEntrPendFijar/@sap:label}" tooltip="Entrega Pendiente de Fijar"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="true">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;UsdEntrPendLiqui&quot;, &quot;leadingProperty&quot;: &quot;UsdEntrPendLiqui&quot;, &quot;sortProperty&quot;: &quot;UsdEntrPendLiqui&quot;, &quot;filterProperty&quot;: &quot;UsdEntrPendLiqui&quot; , &quot;columnIndex&quot;: 10, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/UsdEntrPendLiqui/@sap:label}" tooltip="Entrega pendiente de Liquidar"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="true">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;UsdLiqNoEntregadas&quot;, &quot;leadingProperty&quot;: &quot;UsdLiqNoEntregadas&quot;, &quot;sortProperty&quot;: &quot;UsdLiqNoEntregadas&quot;, &quot;filterProperty&quot;: &quot;UsdLiqNoEntregadas&quot; , &quot;columnIndex&quot;: 11, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/UsdLiqNoEntregadas/@sap:label}" tooltip="Liquidaciones Pendientes para Entregar"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="true">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;UsdPend&quot;, &quot;leadingProperty&quot;: &quot;UsdPend&quot;, &quot;sortProperty&quot;: &quot;UsdPend&quot;, &quot;filterProperty&quot;: &quot;UsdPend&quot; , &quot;columnIndex&quot;: 12, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/UsdPend/@sap:label}" tooltip="Pendiente Entrega"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnPactadas&quot;, &quot;leadingProperty&quot;: &quot;TnPactadas&quot;, &quot;sortProperty&quot;: &quot;TnPactadas&quot;, &quot;filterProperty&quot;: &quot;TnPactadas&quot; , &quot;columnIndex&quot;: 13, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnPactadas/@sap:label}" tooltip="Pactadas"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnEntregadas&quot;, &quot;leadingProperty&quot;: &quot;TnEntregadas&quot;, &quot;sortProperty&quot;: &quot;TnEntregadas&quot;, &quot;filterProperty&quot;: &quot;TnEntregadas&quot; , &quot;columnIndex&quot;: 14, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnEntregadas/@sap:label}" tooltip="Entregadas"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnEntrLiquidadas&quot;, &quot;leadingProperty&quot;: &quot;TnEntrLiquidadas&quot;, &quot;sortProperty&quot;: &quot;TnEntrLiquidadas&quot;, &quot;filterProperty&quot;: &quot;TnEntrLiquidadas&quot; , &quot;columnIndex&quot;: 15, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnEntrLiquidadas/@sap:label}" tooltip="Entregas Liquidadas"/>
+                        </Column>
+                        <Column width="115px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnEntrPendFijar&quot;, &quot;leadingProperty&quot;: &quot;TnEntrPendFijar&quot;, &quot;sortProperty&quot;: &quot;TnEntrPendFijar&quot;, &quot;filterProperty&quot;: &quot;TnEntrPendFijar&quot; , &quot;columnIndex&quot;: 16, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnEntrPendFijar/@sap:label}" tooltip="Entregas Pendiente a Fijar"/>
+                        </Column>
+                        <Column width="115px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnEntrPendLiqui&quot;, &quot;leadingProperty&quot;: &quot;TnEntrPendLiqui&quot;, &quot;sortProperty&quot;: &quot;TnEntrPendLiqui&quot;, &quot;filterProperty&quot;: &quot;TnEntrPendLiqui&quot; , &quot;columnIndex&quot;: 17, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnEntrPendLiqui/@sap:label}" tooltip="Entregas Pendiente a Liquidar"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnLiqNoEntregadas&quot;, &quot;leadingProperty&quot;: &quot;TnLiqNoEntregadas&quot;, &quot;sortProperty&quot;: &quot;TnLiqNoEntregadas&quot;, &quot;filterProperty&quot;: &quot;TnLiqNoEntregadas&quot; , &quot;columnIndex&quot;: 18, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnLiqNoEntregadas/@sap:label}" tooltip="Liquidadas no Entregadas"/>
+                        </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;TnPteEnt&quot;, &quot;leadingProperty&quot;: &quot;TnPteEnt&quot;, &quot;sortProperty&quot;: &quot;TnPteEnt&quot;, &quot;filterProperty&quot;: &quot;TnPteEnt&quot; , &quot;columnIndex&quot;: 19, &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                        <Text class="textoTamañoColumnas" text="{/#det_cereal/TnPteEnt/@sap:label}" tooltip="Pendiente Entregar "/>
                         </Column>
                         </columns>
                         <items>
-                        <ColumnListItem>
+                        <ColumnListItem id="_columnListItem">
                         <cells>
-                          <!--<Button id="_IDGenButton1" press="onPdfDocumento" icon="sap-icon://pdf-attachment" visible="true" type="Emphasized"/>-->
-                           <ObjectStatus   icon="sap-icon://pdf-attachment"  active="true" press="onPdfDocumento"/>
-                          <!--<Link id="_IDGenLink1" text="{Contrato}" press="onPressNegocio"/>-->
-                          <ObjectStatus   icon="sap-icon://detail-view" text="{Contrato}" active="true" press="onPressNegocio"/>
+                          <ObjectStatus class="textoTamañoObjAtt" icon="sap-icon://detail-view" text="{Contrato}" active="true" press="onPressNegocio"/>
+                          <Text class="textoTamañoObjAtt" text="{ClaseDoc}"/>
+                          <Text class="textoTamañoObjAtt" text="{NroComprobante}"/>
+                          <Text class="textoTamañoObjAtt" text="{path:'Fecha', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <Text class="textoTamañoObjAtt" text="{Corredor}"/>
+                          <Text class="textoTamañoObjAtt" text="{DescEspecie}"/>
+                          <Text class="textoTamañoObjAtt" text="{Modalidad}"/>
+                          <Text class="textoTamañoObjAtt" text="{path:'Desde', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <Text class="textoTamañoObjAtt" text="{path:'Hasta', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'UsdEntrPendFijar', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'UsdEntrPendLiqui', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'UsdLiqNoEntregadas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'UsdPend', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnPactadas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnEntregadas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnEntrLiquidadas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnEntrPendFijar', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnEntrPendLiqui', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnLiqNoEntregadas', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <Text class="textoTamañoObjAtt" text="{ path: 'TnPteEnt', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
                         </cells>
                         </ColumnListItem>
                         </items>
                         </Table>
 							</smartTable:SmartTable>
-						</ScrollContainer>
+      </ScrollContainer>
 					</semantic:content>
+            <!--<semantic:customFooterContent>
+            <HBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
+            <ObjectIdentifier title="Totalizados: Entr.Pend.FijarUSD = {Totalizados>/EntrPendFijarUSDTotal}  "/>
+            <ObjectIdentifier title="Entr.Pend.Liq USD = {Totalizados>/EntrPendLiqUSDTotal}      "/>
+            <ObjectIdentifier title="Liq.Pend.Entr USD = {Totalizados>/LiqPendEntrUSDTotal}    "/>
+            <ObjectIdentifier title="Pend.Entrega USD = {Totalizados>/PendEntregaUSDTotal}    "/>
+            </HBox>
+          </semantic:customFooterContent>-->
 				</semantic:FullscreenPage>
 			</App>
-		</Shell>
 	</mvc:View>
+

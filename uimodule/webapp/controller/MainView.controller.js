@@ -12,11 +12,14 @@ sap.ui.define([
   "use strict";
 
   var ValueState = CoreLibrary.ValueState;
-
+  var oController;
+  var rebindTheTable;
+  var contador = 0;
   return Controller.extend("profertil.appCtaCorriente.controller.MainView", {
     onInit: function () {
+      oController = this;
       if (!this.getOwnerComponent().getModel("oModelCliente")) {
-        var oData = { Cliente: "" };
+        var oData = { Cliente: "", isAdmin: oController.validarAdmin()};
         var oModel1 = new sap.ui.model.json.JSONModel(oData);
         this.getOwnerComponent().setModel(oModel1, "oModelCliente");
       }
@@ -35,11 +38,8 @@ sap.ui.define([
 
       //Obtener el valor del cliente si es Administrador
       if (this.validarAdmin() == false) {
-        cliente = "100009";
-        //cliente = "100606";
-        // cliente = "0000100606";
 
-        this.buscarDatos(cliente);
+        this.buscarDatos();
         //es admin,hacer visible el input
         this.getView().byId("Cliente").setVisible(false);
         this.getView().byId("_IDGenLabel1").setVisible(false);
@@ -47,11 +47,8 @@ sap.ui.define([
       } else {
         this.getView().byId("Cliente").setVisible(true);
         this.getView().byId("_IDGenLabel1").setVisible(true);
-
-        MessageBox.information("Para Iniciar filtre por N° de Cliente");
-
+        //MessageBox.information("Para Iniciar filtre por N° de Cliente");
       };
-
     },
 
     onCliente: function (oEvent) {
@@ -60,11 +57,13 @@ sap.ui.define([
     },
 
     validarAdmin: function () {
-      //true;
+      //return true;
       return window.location.href.toLowerCase().includes("-admin");
     },
 
     buscarDatos(cliente) {
+      //Indicador de Carga
+      sap.ui.core.BusyIndicator.show(0);
       //Variables locales
       var fechaActual,
         that = this,
@@ -79,6 +78,8 @@ sap.ui.define([
 
         var aFilters = [];
         var estadoGral = {
+          Kunnr: 0,
+          KunnrName1: 0,
           TotalSaldoFin: 0,
           ASaldoCc: 0,
           FactVencidas: 0,
@@ -103,8 +104,21 @@ sap.ui.define([
           TotalCheques: 0,
           GSaldoRd: 0,
           GSaldoRdRio: 0,
-          FSaldoVencido: 0
+          FSaldoVencido: 0,
+          PosFinProy: 0,
+          rebind: false
         };
+        if (oController.validarAdmin()){
+          sap._sesionProfertil = { cliente: cliente };
+          var o = XMLHttpRequest.prototype.open;
+          XMLHttpRequest.prototype.open = function () {
+              var r = o.apply(this, arguments);
+              if (arguments[1].indexOf("sap/opu/odata/sap/") > 0) {
+                  this.setRequestHeader("from", sap._sesionProfertil.cliente);
+              }
+            return r;
+          };
+        }
         aFilters.push(new Filter("Kunnr", FilterOperator.EQ, cliente));
 
         oModel.read(readurl, {
@@ -118,6 +132,8 @@ sap.ui.define([
               oData.results.forEach(function (oValue, j) {
 
                 estadoGral = {
+                  Kunnr: oValue.Kunnr,                      // Numero de Cliente
+                  KunnrName1: oValue.KunnrName1,            // Nombre de Cliente
                   TotalSaldoFin: oValue.TotalSaldoFin,      //Total
                   ASaldoCc: oValue.ASaldoCc,                //Saldo Compensación en Cuenta Corriente
                   FactVencidas: oValue.FactVencidas,        //Facturas Vencidas
@@ -142,17 +158,21 @@ sap.ui.define([
                   TotalCheques: oValue.TotalCheques,        //Total Cheques
                   GSaldoRd: oValue.GSaldoRd,                //CPD Pendiente de Acreditarse (Banco Galicia)
                   GSaldoRdRio: oValue.GSaldoRdRio,          //CPD Pendiente de Acreditarse (Banco Río)
-                  FSaldoVencido: oValue.FSaldoVencido       //(Vencido) Saldo (-) a Favor / (+) Vencido
+                  FSaldoVencido: oValue.FSaldoVencido,      //(Vencido) Saldo (-) a Favor / (+) Vencido
+                  PosFinProy: oValue.Pos_Fin_Proy,          // Posición Final Proyectada
+                  rebind: true
                 };
                 oModelEstadoGral.setProperty("/ModelEstadoGral", estadoGral);
+                sap.ui.core.BusyIndicator.hide();
               });
               oModelEstadoGral.setProperty("/ModelEstadoGral", estadoGral);
-
+              sap.ui.core.BusyIndicator.hide();
             }
           },
           error: function (oError) {
             // eslint-disable-next-line no-console
             console.error("error al obtener datos del odata");
+            sap.ui.core.BusyIndicator.hide();
           }
         });
       }
@@ -174,7 +194,7 @@ sap.ui.define([
         value1: sValue,
         operator: sap.ui.model.FilterOperator.Contains,
         caseSensitive: false
-      });o
+      });
       oEvent.getSource().getBinding("items").filter(oFilter);
 
     },
@@ -218,23 +238,44 @@ sap.ui.define([
       this._valueHelpCliente.close();
     },
 
-    onPressDetCta: function (evt) {
-      //Redireccionar a  la pagina de detalle
-      var oRouter = this.getOwnerComponent().getRouter();
-      oRouter.navTo("RouteDetCta");
-    },
-
     onPressPagos: function (oEvent) {
       var oCrossAppNav = sap.ushell && sap.ushell.Container && sap.ushell.Container.getService("CrossApplicationNavigation");
       // eslint-disable-next-line camelcase
       var href_display = null;
       // eslint-disable-next-line camelcase
-      href_display = (oCrossAppNav && oCrossAppNav.toExternal({
+      href_display = (oCrossAppNav && oCrossAppNav.hrefForExternal({
+        target: {
+          semanticObject: "informePagoNA",
+          action: "display"
+        },
+      })) || "";
+        var id = window.location.href.substring(window.location.href.indexOf("true&") + 5, window.location.href.lastIndexOf("&sap-startup"));
+        var urlH = window.location.href.replace(id, "sap-ui-app-id=profertil.ReclamoPagos").split("#")[0] + href_display ;
+        var url = urlH.replace("cp.portal/ui5appruntime.html", "site");
+        sap.m.URLHelper.redirect(url, true);
+    },
+
+    onPressInterbanking: function (oEvent){
+      var oCrossAppNav = sap.ushell && sap.ushell.Container && sap.ushell.Container.getService("CrossApplicationNavigation");
+      // eslint-disable-next-line camelcase
+      var href_display = null;
+      // eslint-disable-next-line camelcase
+      href_display = (oCrossAppNav && oCrossAppNav.hrefForExternal({
         target: {
           semanticObject: "Interbanking",
           action: "display"
         },
       })) || "";
+        var id = window.location.href.substring(window.location.href.indexOf("true&") + 5, window.location.href.lastIndexOf("&sap-startup"));
+        var urlH = window.location.href.replace(id, "sap-ui-app-id=profertil.realizarPagos").split("#")[0] + href_display ;
+        var url = urlH.replace("cp.portal/ui5appruntime.html", "site");
+        sap.m.URLHelper.redirect(url, true);
+    },
+
+
+    onPressDetCta: function (evt) {
+      var oRouter = this.getOwnerComponent().getRouter();
+      oRouter.navTo("RouteDetCta", true);
     },
 
     onPressDetCheques: function (evt) {
@@ -249,8 +290,9 @@ sap.ui.define([
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
       oRouter.navTo("RouteNegocio");
     },
-    onPressBancoGalicia: function () {
-
+    onPressMercaderia: function () {
+       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+        oRouter.navTo("RouteMercaderia");
     },
     onPressBancoRio: function () {
 
@@ -266,6 +308,10 @@ sap.ui.define([
       } else {
         MessageToast.show("Search is fired!");
       }
+    },
+    onPressLineaAcre: function (){
+      var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+      oRouter.navTo("RouteLineaAcordada");
     },
   });
 });

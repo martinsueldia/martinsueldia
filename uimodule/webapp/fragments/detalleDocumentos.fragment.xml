@@ -5,13 +5,13 @@
   xmlns:l="sap.ui.layout"
   xmlns:f="sap.ui.layout.form"
   xmlns:core="sap.ui.core">
-  <Dialog id="dialogDocumentos" title="CJ y CD asociados" contentWidth="90%">
+  <Dialog id="dialogDocumentos" title="Entregado" contentWidth="90%">
     <l:Grid defaultSpan="L12 M12 S12" width="auto">
       <l:content>
 	<smartFilterBar:SmartFilterBar id="smartFilterBarDocs" entitySet="docAsociadosSet">
 							<smartFilterBar:controlConfiguration>
-                <smartFilterBar:ControlConfiguration id="NroComprobante" key="NroComprobante" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
-                <smartFilterBar:ControlConfiguration id="carta_de_porte" key="carta_de_porte" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
+                <smartFilterBar:ControlConfiguration id="NroComprobante" filterType="single" controlType="input" key="NroComprobante" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
+                <smartFilterBar:ControlConfiguration id="carta_de_porte" filterType="single" controlType="input" key="carta_de_porte" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
 							</smartFilterBar:controlConfiguration>
 							<smartFilterBar:layoutData>
 								<FlexItemData shrinkFactor="0"/>
@@ -25,37 +25,99 @@
                         showRowCount="true"
                         demandPopin="true"
                         enableAutoBinding="true"
-                        ignoredFields="bzirk,name1"
-                        requestAtLeastFields="NroComprobante,Kunnr,carta_de_porte,fecha,tn,bukrs,gjahr,belnr,name1"
-                        initiallyVisibleFields="NroComprobante,Kunnr,carta_de_porte,fecha,tn,bukrs,gjahr,belnr">
+                        ignoredFields="bzirk,name1,bukrs"
+                        requestAtLeastFields="NroComprobante,Kunnr,ClaseDoc,carta_de_porte,fecha,tn,bukrs,gjahr,belnr,name1"
+                        initiallyVisibleFields="Contrato,NroComprobante,Kunnr,ClaseDoc,fecha,carta_de_porte,tn,gjahr">
 							<smartTable:layoutData>
 								<FlexItemData
 									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
                     <Table>
                         <columns>
-                        <Column  width="100px" hAlign="Begin">
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "Contrato", "leadingProperty": "Contrato", "sortProperty": "Contrato", "columnIndex":"0"}'/>
+                        </customData>
+                        <Text text="Nro de Contrato"/>
+                       </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "NroComprobante", "leadingProperty": "NroComprobante", "sortProperty": "NroComprobante", "columnIndex":"1"}'/>
+                        </customData>
+                        <Text text="Nro Comprobante"/>
+                       </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "Kunnr", "leadingProperty": "Kunnr", "sortProperty": "Kunnr", "columnIndex":"2"}'/>
+                        </customData>
+                        <Text text="Cliente"/>
+                       </Column>
+                       <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "carta_de_porte", "leadingProperty": "carta_de_porte", "sortProperty": "carta_de_porte", "columnIndex":"3"}'/>
+                        </customData>
+                        <Text text="Carta Porte"/>
+                       </Column>
+                        <Column  width="100px" hAlign="Center">
                         <customData>
                         <core:CustomData key="p13nData"
                         value='\{"columnKey": "fecha", "leadingProperty": "fecha", "sortProperty": "fecha", "columnIndex":"4"}'/>
                         </customData>
                         <Text text="Fecha"/>
                        </Column>
-                        <Column width="100px" hAlign="Begin">
+                       <Column  width="100px" hAlign="Center">
                         <customData>
                         <core:CustomData key="p13nData"
-                        value='\{"columnKey": "bzirk", "leadingProperty": "bzirk", "sortProperty": "bzirk", "columnIndex":"9"}'/>
+                        value='\{"columnKey": "venc", "leadingProperty": "venc", "sortProperty": "venc", "columnIndex":"5"}'/>
                         </customData>
-                        <Text text="Descargar Documento"/>
+                        <Text text="Vencimiento"/>
+                       </Column>
+                      <Column  width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "ClaseDoc", "leadingProperty": "ClaseDoc", "sortProperty": "ClaseDoc", "columnIndex":"6"}'/>
+                        </customData>
+                        <Text text="Concepto"/>
+                       </Column>
+                       <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "tn", "leadingProperty": "tn", "sortProperty": "tn", "columnIndex":"7"}'/>
+                        </customData>
+                        <Text text="TN"/>
+                       </Column>
+                        <Column width="100px" hAlign="Center">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "gjahr", "leadingProperty": "gjahr", "sortProperty": "gjahr", "columnIndex":"8"}'/>
+                        </customData>
+                        <Text text="Ejercicio"/>
+                       </Column>
+                        <Column width="100px" hAlign="Center" visible="false">
+                        <customData>
+                        <core:CustomData key="p13nData"
+                        value='\{"columnKey": "belnr", "leadingProperty": "belnr", "sortProperty": "belnr", "columnIndex":"9"}'/>
+                        </customData>
+                        <Text text="Número de un documento contable "/>
                        </Column>
                         </columns>
                         <items>
                         <ColumnListItem>
                         <cells>
-                          <Text text ="{ path: 'fecha' , type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium', source: { pattern: 'dd/MM/yyyy' } } }"/>
-                          <!--<Link id="_IDGenLink1" text="{belnr}" press="onPressEntregas"/>-->
-                           <!--<Button id="_IDGenButton1" press="onPressEntregas" icon="sap-icon://pdf-attachment" visible="true" type="Emphasized"/>-->
-                           <ObjectStatus icon="sap-icon://pdf-attachment" active="true" press="onPressEntregas"/>
+                          <ObjectAttribute text="{Contrato}" />
+                          <ObjectAttribute text="{NroComprobante}" />
+                          <ObjectAttribute text="{Kunnr}" />
+                          <ObjectAttribute text="{carta_de_porte}"/>
+                          <ObjectAttribute text="{path:'fecha', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{path:'venc', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                          <ObjectAttribute text="{ClaseDoc}" />
+                          <ObjectAttribute text="{ path: 'tn', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                          <ObjectAttribute text="{gjahr}" />
+                          <ObjectAttribute text="{belnr}" />
                            </cells>
                         </ColumnListItem>
                         </items>

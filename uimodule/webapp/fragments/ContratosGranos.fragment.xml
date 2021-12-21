@@ -25,7 +25,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/ICerAVenc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos" />
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/ICerAVenc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos" />
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
@@ -34,7 +34,7 @@
 				</cells>
 				<cells>
 					<Text
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/HCerVenc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/HCerVenc', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

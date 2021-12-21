@@ -18,7 +18,7 @@
           },
           "semanticObject": "CuentaCorriente",
           "action": "display",
-          "title": "Cuenta Corriente",
+          "title": "Cuenta Corriente Ampliada",
           "icon": "sap-icon://customer-financial-fact-sheet"
         }
       }
@@ -37,6 +37,14 @@
         "type": "OData",
         "settings": {
           "localUri": "localService/ZSV_RELATED_DOCS_SRV/metadata.xml"
+        }
+      },
+      "ZSV_MERCADERIA_SRV": {
+        "uri": "sap/opu/odata/sap/ZSV_MERCADERIA_SRV",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/ZSV_MERCADERIA_SRV/metadata.xml"
         }
       }
     }
@@ -112,6 +120,16 @@
           "defaultCountMode": "Inline",
           "refreshAfterChange": false
         }
+      },
+      "MercaderiaPendiente": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultOperationMode": "Client",
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "preload": true
+        },
+        "dataSource": "ZSV_MERCADERIA_SRV"
       }
     },
     "resources": {
@@ -166,6 +184,41 @@
           "target": [
             "TargetNegocio"
           ]
+        },
+        {
+          "name": "RouteLineaAcordada",
+          "pattern": "RouteLineaAcordada",
+          "target": [
+            "TargetLineaAcordada"
+          ]
+        },
+        {
+          "name": "RouteMercaderia",
+          "pattern": "RouteMercaderia",
+          "target": [
+            "TargetMercaderia"
+          ]
+        },
+        {
+          "name": "FacturadaPagada",
+          "pattern": "FacturadaPagada",
+          "target": [
+            "FacturadaPagada"
+          ]
+        },
+        {
+          "name": "FacturadaNoPagada",
+          "pattern": "FacturadaNoPagada",
+          "target": [
+            "FacturadaNoPagada"
+          ]
+        },
+        {
+          "name": "NoFacturadaNoPagada",
+          "pattern": "NoFacturadaNoPagada",
+          "target": [
+            "NoFacturadaNoPagada"
+          ]
         }
       ],
       "targets": {
@@ -198,6 +251,39 @@
           "transition": "slide",
           "viewId": "DetalleNegocio",
           "viewName": "DetalleNegocio"
+        },
+        "TargetLineaAcordada": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetalleCreditoAcordada",
+          "viewName": "DetalleCreditoAcordada"
+        },
+        "TargetMercaderia": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetalleMercaderia",
+          "viewName": "DetalleMercaderia"
+        },
+        "FacturadaPagada": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "FacturadaPagada",
+          "viewName": "FacturadaPagada"
+        },
+        "FacturadaNoPagada": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "FacturadaNoPagada",
+          "viewName": "FacturadaNoPagada"
+        },
+        "NoFacturadaNoPagada": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "NoFacturadaNoPagada",
+          "viewName": "NoFacturadaNoPagada"
         }
       }
     }

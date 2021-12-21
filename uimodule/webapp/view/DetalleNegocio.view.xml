@@ -1,74 +1,167 @@
-<mvc:View
-	  controllerName="profertil.appCtaCorriente.controller.DetalleNegocio"
-    id="view1"
-	  height="100%"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:semantic="sap.m.semantic"
-	xmlns:ui="sap.ca.ui"
-		displayBlock="true">
-	<Shell id="shell">
+<mvc:View xmlns:smartTable="sap.ui.comp.smarttable" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:ui="sap.ca.ui" controllerName="profertil.appCtaCorriente.controller.DetalleNegocio" id="view1" height="100%" displayBlock="true">
 		<App id="App">
-			<semantic:FullscreenPage title="{i18n>detNegocio}"
-                               showNavButton="true" navButtonPress="onNavBack">
+			<semantic:FullscreenPage title="{i18n>detNegocio}" showNavButton="true" navButtonPress="onNavBack">
+        <!--<semantic:titleCustomTextActions>
+					<Button id="btnCliente" text="Cliente : {ModelEstadoGral>/ModelEstadoGral/Kunnr}"/>
+				</semantic:titleCustomTextActions>-->
 				<semantic:content>
-						<smartTable:SmartTable id="negocioTabla" width="100%"
-                        entitySet="det_negocioSet" smartFilterId="smartFilterBar"
-                        tableType="ResponsiveTable" useExportToExcel="true"
-                        editable="false" beforeExport="onBeforeExport"  beforeRebindTable="onBeforeRebindTable" header="{i18n>totalRegis}"
-                        useVariantManagement="false" useTablePersonalisation="true"
-                        showRowCount="true"
-                        enableAutoBinding="true"
-                        persistencyKey="SmartTableAnalytical_Explored"
-                        demandPopin="true"
-                        ignoredFields="Kunnr"
-                        requestAtLeastFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido"
-                        initiallyVisibleFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido">
-                        <ScrollContainer id="containerForm2" width="100%" horizontal="false" vertical="true">
-                        <Table growingThreshold="99999999" growing="true">
+          <ScrollContainer id="containerForm" width="100%" horizontal="true" vertical="false">
+						<smartTable:SmartTable
+            id="negocioTabla"
+            width="100%"
+            entitySet="det_negocioSet"
+            smartFilterId="smartFilterBar"
+            tableType="ResponsiveTable"
+            useExportToExcel="true"
+            editable="false"
+            beforeExport="onBeforeExport"
+            beforeRebindTable="onBeforeRebindTable"
+            header="{i18n>totalRegis}"
+            useVariantManagement="false"
+            useTablePersonalisation="true"
+            showRowCount="true"
+            enableAutoBinding="true"
+            persistencyKey="SmartTableAnalytical_Explored"
+            demandPopin="false"
+            ignoredFields="Kunnr,Total"
+            requestAtLeastFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido,Diasmora"
+            initiallyVisibleFields="Vbeln,Bstdk,Arktx,Netpr,BstdkE,Zmeng,CupoSinFact,Saldo,Valor,Vencido,Diasmora">
+                        <Table id="tablaNegocios" updateFinished="onUpdateFinished" growingThreshold="99999999" growing="true" fixedLayout="true" sticky="ColumnHeaders,HeaderToolbar">
                           <columns>
-                            <Column width="50px" hAlign="Begin">
+                            <Column width="35px" hAlign="Center">
                             <customData>
-                            <core:CustomData key="p13nData"
-                            value='\{"columnKey": "Kunnr", "leadingProperty": "Kunnr"}'/>
+                            <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Kunnr&quot;, &quot;leadingProperty&quot;: &quot;Kunnr&quot;}"/>
                             </customData>
-                            <Text  text="Doc"/>
+                            <Text text="Doc" tooltip="Documento Descargable"/>
                             </Column>
-                            <Column   width="120px" hAlign="Begin">
-                           <customData>
-                              <core:CustomData key="p13nData" value='\{"columnKey": "Vbeln", "leadingProperty": "Vbeln", "sortProperty": "Vbeln", "filterProperty":  "Vbeln" }'/>
-                        </customData>
-                            <Text text="Negocio"/>
+                            <Column width="120px" hAlign="Center">
+                            <customData>
+                            <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Arktx&quot;, &quot;leadingProperty&quot;: &quot;Arktx&quot;, &quot;columnIndex&quot;: 1}"/>
+                            </customData>
+                            <Text text="{/#det_negocio/Arktx/@sap:label}" tooltip="Producto"/>
                             </Column>
-                            <Column   width="120px" hAlign="Begin">
+                            <Column width="115px" hAlign="Center" visible="false">
                            <customData>
-                              <core:CustomData key="p13nData" value='\{"columnKey": "Bstdk", "leadingProperty": "Bstdk", "sortProperty": "Bstdk", "filterProperty":  "Bstdk", "columnIndex": 3 }'/>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Vbeln&quot;, &quot;leadingProperty&quot;: &quot;Vbeln&quot;, &quot;sortProperty&quot;: &quot;Vbeln&quot;, &quot;filterProperty&quot;:  &quot;Vbeln&quot; }"/>
                         </customData>
-                            <Text text="{/#det_negocio/Bstdk/@sap:label}"/>
+                            <Text text="{/#det_negocio/Vbeln/@sap:label}" tooltip="Negocio"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Bstdk&quot;, &quot;leadingProperty&quot;: &quot;Bstdk&quot;, &quot;sortProperty&quot;: &quot;Bstdk&quot;, &quot;filterProperty&quot;:  &quot;Bstdk&quot;, &quot;columnIndex&quot;: 2 , &quot;type&quot;: &quot;date&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Bstdk/@sap:label}" tooltip="Fecha de Negocio"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;BstdkE&quot;, &quot;leadingProperty&quot;: &quot;BstdkE&quot;, &quot;sortProperty&quot;: &quot;BstdkE&quot;, &quot;filterProperty&quot;:  &quot;BstdkE&quot;, &quot;columnIndex&quot;: 3 , &quot;type&quot;: &quot;date&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/BstdkE/@sap:label}" tooltip="Fecha de Pago"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Netpr&quot;, &quot;leadingProperty&quot;: &quot;Netpr&quot;, &quot;sortProperty&quot;: &quot;Netpr&quot;, &quot;filterProperty&quot;:  &quot;Netpr&quot;, &quot;columnIndex&quot;: 4 , &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Netpr/@sap:label}" tooltip="Precio"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Zmeng&quot;, &quot;leadingProperty&quot;: &quot;Zmeng&quot;, &quot;sortProperty&quot;: &quot;Zmeng&quot;, &quot;filterProperty&quot;:  &quot;Zmeng&quot;, &quot;columnIndex&quot;: 5 , &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Zmeng/@sap:label}" tooltip="Negociado"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;CupoSinFact&quot;, &quot;leadingProperty&quot;: &quot;CupoSinFact&quot;, &quot;sortProperty&quot;: &quot;CupoSinFact&quot;, &quot;filterProperty&quot;:  &quot;CupoSinFact&quot;, &quot;columnIndex&quot;: 6 , &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/CupoSinFact/@sap:label}" tooltip="Cupo sin Factura"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Saldo&quot;, &quot;leadingProperty&quot;: &quot;Saldo&quot;, &quot;sortProperty&quot;: &quot;Saldo&quot;, &quot;filterProperty&quot;:  &quot;Saldo&quot;, &quot;columnIndex&quot;: 7 , &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Saldo/@sap:label}" tooltip="Saldo sin Factura"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Valor&quot;, &quot;leadingProperty&quot;: &quot;Valor&quot;, &quot;sortProperty&quot;: &quot;Valor&quot;, &quot;filterProperty&quot;:  &quot;Valor&quot;, &quot;columnIndex&quot;: 8 , &quot;type&quot;: &quot;numeric&quot;}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Valor/@sap:label}" tooltip="Dolar mas Impuesto al Valor Agregado"/>
+                            </Column>
+                           <Column width="50px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Vencido&quot;, &quot;leadingProperty&quot;: &quot;Vencido&quot;, &quot;sortProperty&quot;: &quot;Vencido&quot;, &quot;filterProperty&quot;:  &quot;Vencido&quot;, &quot;columnIndex&quot;: 9}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Vencido/@sap:label}" tooltip="Vencido"/>
+                            </Column>
+                            <Column width="75px" hAlign="Center">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Diasmora&quot;, &quot;leadingProperty&quot;: &quot;Diasmora&quot;, &quot;sortProperty&quot;: &quot;Diasmora&quot;, &quot;filterProperty&quot;:  &quot;Diasmora&quot;, &quot;columnIndex&quot;: 10}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Diasmora/@sap:label}" tooltip="Mora"/>
+                            </Column>
+                             <Column width="100px" hAlign="Center" visible="false">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Kkber&quot;, &quot;leadingProperty&quot;: &quot;Kkber&quot;, &quot;sortProperty&quot;: &quot;Kkber&quot;, &quot;filterProperty&quot;:  &quot;Kkber&quot;, &quot;columnIndex&quot;: 11}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Kkber/@sap:label}" tooltip="ACC"/>
+                            </Column>
+                            <Column width="50px" hAlign="Center" visible="false">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Werks&quot;, &quot;leadingProperty&quot;: &quot;Werks&quot;, &quot;sortProperty&quot;: &quot;Werks&quot;, &quot;filterProperty&quot;:  &quot;Werks&quot;, &quot;columnIndex&quot;: 12}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Werks/@sap:label}" tooltip="Centro"/>
+                            </Column>
+                            <Column width="100px" hAlign="Center" visible="false">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Bsark&quot;, &quot;leadingProperty&quot;: &quot;Bsark&quot;, &quot;sortProperty&quot;: &quot;Bsark&quot;, &quot;filterProperty&quot;:  &quot;Bsark&quot;, &quot;columnIndex&quot;: 14}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Bsark/@sap:label}" tooltip="Tipo Ct."/>
+                            </Column>
+                            <Column width="100px" hAlign="Center" visible="false">
+                           <customData>
+                              <core:CustomData key="p13nData" value="\{&quot;columnKey&quot;: &quot;Gueen&quot;, &quot;leadingProperty&quot;: &quot;Gueen&quot;, &quot;sortProperty&quot;: &quot;Gueen&quot;, &quot;filterProperty&quot;:  &quot;Gueen&quot;, &quot;columnIndex&quot;: 15}"/>
+                        </customData>
+                            <Text text="{/#det_negocio/Gueen/@sap:label}" tooltip="Vigencia Negocio"/>
                             </Column>
                         </columns>
                             <items>
-                              <ColumnListItem  highlight="{path:'Vencido', formatter:'.formatRowHighlight'}">
+                              <ColumnListItem highlight="{path:'Vencido', formatter:'.formatRowHighlight'}">
                                <cells>
-                                  <!--<Button id="_IDGenButton1" press="onPdfDocumentoNegocio" icon="sap-icon://pdf-attachment" visible="true" type="Emphasized"/>-->
-                                   <ObjectStatus  icon="sap-icon://pdf-attachment"  active="true" press="onPdfDocumentoNegocio"/>
-                                  <!--<Link id="_IDGenLink1" text="{Vbeln}" press="onPressNegocio"/>-->
+                                   <ObjectStatus icon="sap-icon://pdf-attachment" active="true" press="onPdfDocumentoNegocio"/>
+                                    <ObjectAttribute text="{Arktx}"/>
                                    <ObjectStatus icon="sap-icon://detail-view" text="{Vbeln}" active="true" press="onPressNegocio"/>
-                                   <ObjectAttribute text="{path:'Bstdk', type: 'sap.ui.model.type.Date', formatOptions: {UTC: true}}"/>
+                                   <ObjectAttribute text="{path:'Bstdk', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                                   <ObjectAttribute text="{path:'BstdkE', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
+                                   <ObjectAttribute text="{ path: 'Netpr', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                                   <ObjectAttribute text="{ path: 'Zmeng', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                                   <ObjectAttribute text="{ path: 'CupoSinFact', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                                   <ObjectAttribute text="{ path: 'Saldo', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                                   <ObjectAttribute text="{ path: 'Valor', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}"/>
+                                   <ObjectAttribute text="{Vencido}"/>
+                                   <ObjectAttribute text="{Diasmora}"/>
+                                   <ObjectAttribute text="{Kkber}"/>
+                                   <ObjectAttribute text="{Werks}"/>
+                                   <ObjectAttribute text="{Bsark}"/>
+                                   <ObjectAttribute text="{path:'Gueen', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', UTC: true}}"/>
                                 </cells>
                               </ColumnListItem>
                            </items>
                         </Table>
-                        </ScrollContainer>
+
 							<smartTable:layoutData>
-								<FlexItemData
-									xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
+								<FlexItemData xmlns="sap.m" id="FlexItemData" growFactor="1" baseSize="0%"/>
 								</smartTable:layoutData>
 							</smartTable:SmartTable>
+              </ScrollContainer>
 					</semantic:content>
+				<semantic:subHeader>
+				    <Bar id="bar0">
+				        <contentRight>
+                    <Button id="btnCliente" text="Cliente : {ModelEstadoGral>/ModelEstadoGral/Kunnr} - {ModelEstadoGral>/ModelEstadoGral/KunnrName1}" type="Transparent"/>
+                 </contentRight>
+				    </Bar>
+				</semantic:subHeader>
 				</semantic:FullscreenPage>
 			</App>
-		</Shell>
 	</mvc:View>

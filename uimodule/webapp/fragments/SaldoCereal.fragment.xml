@@ -24,7 +24,7 @@
 				</cells>
 				<cells>
 					<Text id="_IDGenText4"
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/OpePFijar', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/OpePFijar', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem id="_IDGenColumnListItem2">
@@ -33,7 +33,7 @@
 				</cells>
 				<cells>
 					<Text id="_IDGenText6"
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/OpePFactu', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/OpePFactu', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem id="_IDGenColumnListItem3">
@@ -42,7 +42,7 @@
 				</cells>
 				<cells>
 					<Text id="_IDGenText8"
-						text="{path: 'ModelEstadoGral>/ModelEstadoGral/OpePEntrega', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 2}}" class="montos"/>
+						text="{path: 'ModelEstadoGral>/ModelEstadoGral/OpePEntrega', type:'sap.ui.model.type.Float', formatOptions : { groupingEnabled: true, groupingSeparator: '.', decimalSeparator : ',', minFractionDigits: 0}}" class="montos"/>
 				</cells>
 			</ColumnListItem>
 		</items>

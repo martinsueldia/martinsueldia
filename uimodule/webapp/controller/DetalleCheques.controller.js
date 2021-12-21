@@ -18,7 +18,11 @@ sap.ui.define([
     },
 
     _onRouteMatched: function(){
-      this.getView().byId("chequeTabla").rebindTable();
+       var clienteA = this.getModel("ModelEstadoGral").getData().ModelEstadoGral.Kunnr;
+      if (clienteA != this.clienteB){
+        this.clienteB = clienteA;
+        this.getView().byId("chequeTabla").rebindTable();
+      }
     },
 
 
@@ -47,5 +51,8 @@ sap.ui.define([
         oRouter.navTo("RouteMainView", {}, true);
       }
     },
+    onBeforeExport: function (oEvent){
+      oEvent.getParameter("exportSettings").worker = false;
+    }
   });
 });

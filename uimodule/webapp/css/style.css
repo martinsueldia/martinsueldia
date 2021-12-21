@@ -23,3 +23,28 @@
 .myPanel{
   color: green;
 }
+
+.sapMText {
+font-size: 0.9em !important;
+}
+
+/* .sapMColumnHeaderContent {
+font-size: 0.81em !important;
+} */
+
+.textoTamañoObjAtt{
+font-size: 0.85em !important;
+}
+
+.textoTamañoColumnas{
+  font-size: 0.81em !important;
+}
+
+
+.sapMObjStatusText {
+  font-size: 0.9em !important;
+}
+
+.sapMObjectAttributeText {
+font-size: 0.5em!important;
+}
